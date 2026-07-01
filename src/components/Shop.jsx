@@ -1,0 +1,244 @@
+import { useMemo, useState } from "react";
+import { PRODUCTS } from "../data/products.js";
+import ProductCard from "./ProductCard.jsx";
+
+export default function Shop({ filter, setFilter }) {
+  const [sort, setSort] = useState("featured");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedSeason, setSelectedSeason] = useState("All");
+  const [priceFilter, setPriceFilter] = useState("All");
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const categories = useMemo(() => ["All", ...new Set(PRODUCTS.map((p) => p.cat))], []);
+
+  const items = useMemo(() => {
+    let list = filter === "All" ? [...PRODUCTS] : PRODUCTS.filter((p) => p.cat === filter);
+    
+    // Filter by season
+    if (selectedSeason !== "All") {
+      list = list.filter((p) => p.season === selectedSeason);
+    }
+
+    // Filter by price
+    if (priceFilter !== "All") {
+      if (priceFilter === "under2k") list = list.filter((p) => p.price < 2000);
+      if (priceFilter === "2k5k") list = list.filter((p) => p.price >= 2000 && p.price <= 5000);
+      if (priceFilter === "over5k") list = list.filter((p) => p.price > 5000);
+    }
+
+    // Filter by search
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      list = list.filter((p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.cat.toLowerCase().includes(q)
+      );
+    }
+    if (sort === "low") list.sort((a, b) => a.price - b.price);
+    if (sort === "high") list.sort((a, b) => b.price - a.price);
+    return list;
+  }, [filter, sort, searchQuery, selectedSeason, priceFilter]);
+
+  function handleResetFilters() {
+    setFilter("All");
+    setSelectedSeason("All");
+    setPriceFilter("All");
+    setSearchQuery("");
+    setSort("featured");
+  }
+
+  // Sub-component to render all filter sections cleanly
+  function FilterContent() {
+    return (
+      <div className="space-y-8 animate-fadeIn">
+        {/* Search */}
+        <div>
+          <h4 className="text-[11px] uppercase tracking-[0.18em] text-charcoal/40 font-bold mb-3">Search Products</h4>
+          <div className="relative">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by name..."
+              className="w-full pl-9 pr-8 py-2.5 border border-line bg-white text-xs outline-none focus:border-rust transition-colors"
+            />
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-charcoal/40 text-xs">🔍</span>
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-charcoal/50 hover:text-rust text-sm cursor-pointer"
+              >
+                ×
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Categories */}
+        <div>
+          <h4 className="text-[11px] uppercase tracking-[0.18em] text-charcoal/40 font-bold mb-3">Categories</h4>
+          <select
+            value={filter}
+            onChange={(e) => {
+              setFilter(e.target.value);
+              setSearchQuery("");
+            }}
+            className="w-full border border-line bg-white text-xs px-3 py-2.5 outline-none cursor-pointer hover:border-rust transition-colors"
+          >
+            {categories.map((c) => (
+              <option key={c} value={c}>
+                {c === "All" ? "All Categories" : c}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Season Filter */}
+        <div>
+          <h4 className="text-[11px] uppercase tracking-[0.18em] text-charcoal/40 font-bold mb-3">Season drop</h4>
+          <select
+            value={selectedSeason}
+            onChange={(e) => setSelectedSeason(e.target.value)}
+            className="w-full border border-line bg-white text-xs px-3 py-2.5 outline-none cursor-pointer hover:border-rust transition-colors"
+          >
+            <option value="All">All Seasons</option>
+            <option value="Summer">Summer Drop</option>
+            <option value="Autumn">Autumn Edit</option>
+            <option value="Festive">Festive Edit</option>
+          </select>
+        </div>
+
+        {/* Price Filter */}
+        <div>
+          <h4 className="text-[11px] uppercase tracking-[0.18em] text-charcoal/40 font-bold mb-3">Price bracket</h4>
+          <select
+            value={priceFilter}
+            onChange={(e) => setPriceFilter(e.target.value)}
+            className="w-full border border-line bg-white text-xs px-3 py-2.5 outline-none cursor-pointer hover:border-rust transition-colors"
+          >
+            <option value="All">All Prices</option>
+            <option value="under2k">Under ₹2,000</option>
+            <option value="2k5k">₹2,000 - ₹5,000</option>
+            <option value="over5k">Over ₹5,000</option>
+          </select>
+        </div>
+
+        {/* Sort */}
+        <div>
+          <h4 className="text-[11px] uppercase tracking-[0.18em] text-charcoal/40 font-bold mb-3">Sort list</h4>
+          <select
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+            className="w-full border border-line bg-white text-xs px-3 py-2.5 outline-none cursor-pointer hover:border-rust transition-colors"
+          >
+            <option value="featured">Sort: Featured</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+          </select>
+        </div>
+
+        {/* Reset */}
+        <button
+          onClick={handleResetFilters}
+          className="w-full py-2.5 border border-line text-[11px] font-bold uppercase tracking-wider text-charcoal/60 hover:text-rust hover:border-rust transition-colors bg-white cursor-pointer"
+        >
+          Clear Filters
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <section id="shop" className="py-16 md:py-24">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+        
+        {/* Header Title */}
+        <div className="mb-14">
+          <span className="block text-xs tracking-[0.2em] uppercase text-rust mb-2 font-semibold">
+            Bestsellers
+          </span>
+          <h2 className="font-serif font-medium text-3xl md:text-5xl text-charcoal">Loved This Season</h2>
+          <div className="w-12 h-0.5 bg-rust mt-4" />
+        </div>
+
+        {/* Mobile Filters Header (Top Right Trigger) */}
+        <div className="flex lg:hidden justify-between items-center pb-5 mb-8 border-b border-line">
+          <span className="text-sm text-charcoal/50 font-medium">{items.length} products found</span>
+          <button
+            onClick={() => setMobileFiltersOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 border border-line rounded-full text-[11.5px] font-bold uppercase tracking-wider bg-white hover:border-rust transition-colors cursor-pointer"
+          >
+            Filters ⚙️
+          </button>
+        </div>
+
+        {/* Desktop Split Columns Grid */}
+        <div className="grid lg:grid-cols-[250px_1fr] gap-12 items-start">
+          
+          {/* Left Column: Sticky Sidebar for Desktop */}
+          <aside className="hidden lg:block w-[250px] sticky top-28 self-start bg-cream-2/20 p-6 border border-line rounded-sm shadow-xs">
+            <FilterContent />
+          </aside>
+
+          {/* Right Column: Dynamic Products Grid */}
+          <div className="flex-grow">
+            {/* Desktop Count Row */}
+            <div className="hidden lg:flex justify-between items-center pb-4 mb-8 border-b border-line text-xs tracking-wider text-charcoal/40 uppercase font-semibold">
+              <span>{items.length} styles available</span>
+              <span>Showing: {filter} collections</span>
+            </div>
+
+            {items.length === 0 ? (
+              <div className="text-center py-24 text-charcoal/50 bg-cream-2/10 border border-dashed border-line">
+                <span className="text-4xl block mb-4">🔍</span>
+                <p className="text-sm font-medium">No products match your search criteria.</p>
+                <button
+                  onClick={handleResetFilters}
+                  className="mt-4 px-5 py-2 bg-charcoal text-cream text-xs uppercase tracking-wider font-semibold hover:bg-rust transition-colors cursor-pointer"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
+                {items.map((p) => (
+                  <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
+            )}
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Mobile Slide-Over Filters Drawer */}
+      {mobileFiltersOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            onClick={() => setMobileFiltersOpen(false)}
+            className="fixed inset-0 bg-charcoal/50 z-[110] transition-opacity duration-300 animate-fadeIn"
+          />
+
+          {/* Drawer content */}
+          <aside className="fixed top-0 right-0 bottom-0 w-[320px] max-w-[85vw] bg-cream z-[120] shadow-2xl p-7 overflow-y-auto flex flex-col justify-between border-l border-line transition-transform duration-300 animate-slideLeft">
+            <div>
+              <div className="flex justify-between items-center pb-5 mb-8 border-b border-line">
+                <h3 className="font-serif text-xl font-bold text-charcoal">Filter Catalog</h3>
+                <button
+                  onClick={() => setMobileFiltersOpen(false)}
+                  className="text-2xl leading-none text-charcoal/40 hover:text-rust cursor-pointer"
+                >
+                  ×
+                </button>
+              </div>
+              <FilterContent />
+            </div>
+          </aside>
+        </>
+      )}
+    </section>
+  );
+}
+
