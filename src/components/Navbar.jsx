@@ -29,14 +29,17 @@ export default function Navbar() {
       </div>
 
       <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-line">
-        <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-4.5">
-          <Link 
-            to="/" 
-            className="font-serif text-3xl font-semibold flex items-baseline gap-0.5 tracking-tight hover:opacity-90"
-          >
-            PMRG Solution<span className="text-rust italic font-bold">.</span>
-          </Link>
-
+       <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-1.5">
+  <Link
+    to="/"
+    className="flex items-center hover:opacity-90"
+  >
+    <img
+      src="/logo.jpeg"
+      alt="PMRG Solution Logo"
+      className="h-22 w-auto"
+    />
+  </Link>
           <div className="hidden lg:flex gap-8 text-[13px] tracking-[0.08em] uppercase font-medium">
             {navItems.map((item) => (
               item.isLogin ? (
