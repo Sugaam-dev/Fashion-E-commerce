@@ -1,6 +1,6 @@
-import { FaInstagram, FaFacebookF, FaPinterestP } from "react-icons/fa6";
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-
+import { CiYoutube } from "react-icons/ci";
 export default function Footer() {
   return (
     <footer className="pt-16 md:pt-20 pb-8 border-t border-line">
@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 md:gap-12 mb-14">
           <div>
             <div className="font-serif text-2xl font-semibold mb-3">
-              Shrikamalini<span className="text-rust italic font-bold">.</span>
+              Shrikamalini
             </div>
             <p className="text-sm text-charcoal/55 leading-relaxed max-w-xs">
               Contemporary ethnic wear, jewellery and custom women accessories, 
@@ -47,7 +47,7 @@ export default function Footer() {
             {[
               { icon: <FaInstagram size={14} />, label: "Instagram" },
               { icon: <FaFacebookF size={14} />, label: "Facebook" },
-              { icon: <FaPinterestP  size={14} />, label: "Pinterest" }
+              { icon: <CiYoutube   size={14} />, label: "YouTube" }
             ].map((s, i) => (
               <a
                 key={i}
