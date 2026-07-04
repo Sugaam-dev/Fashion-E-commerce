@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Landmark, Copy, Upload, ArrowLeft } from "lucide-react";
 import { useCart } from "../CartContext.jsx";
 
 export default function PaymentPage({ onComplete }) {
@@ -24,14 +25,15 @@ export default function PaymentPage({ onComplete }) {
     return (
       <div className="bg-cream min-h-screen py-16 md:py-24 text-center">
         <div className="max-w-[1280px] mx-auto px-6">
-          <span className="text-4xl block mb-4">👜</span>
+          <ShoppingBag size={48} className="mx-auto text-charcoal/20 mb-4 stroke-[1.2]" />
           <h2 className="font-serif text-2xl font-bold mb-4">Your bag is empty</h2>
           <p className="text-sm text-charcoal/60 mb-6">Please add items to your cart before proceeding to payment.</p>
           <button
             onClick={onComplete}
-            className="px-6 py-3 bg-rust text-white text-[12.5px] tracking-wider uppercase font-semibold hover:bg-rust-deep transition-colors cursor-pointer"
+            className="px-6 py-3 bg-rust text-white text-[12.5px] tracking-wider uppercase font-semibold hover:bg-rust-deep transition-colors cursor-pointer flex items-center gap-2 mx-auto"
           >
-            Go Back Home
+            <ArrowLeft size={14} className="stroke-[2.2]" />
+            <span>Go Back Home</span>
           </button>
         </div>
       </div>
@@ -98,7 +100,7 @@ export default function PaymentPage({ onComplete }) {
                     ))}
                   </div>
                   <span className="absolute text-[10px] tracking-widest bg-rust text-white font-bold px-2 py-0.5 shadow-xs uppercase">
-                    PMRG UPI
+                    SHRIKAMALINI UPI
                   </span>
                 </div>
 
@@ -106,12 +108,13 @@ export default function PaymentPage({ onComplete }) {
                   <span className="block text-[11px] uppercase tracking-wider text-charcoal/40 font-medium mb-1.5">UPI ID</span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("pmrgsolutions@upi");
+                      navigator.clipboard.writeText("shrikamalini@upi");
                       showToast("UPI ID Copied to Clipboard!");
                     }}
-                    className="w-full py-2 bg-cream hover:bg-cream-2 text-[12.5px] border border-line rounded-sm font-semibold tracking-wide transition-colors cursor-pointer"
+                    className="w-full py-2 bg-cream hover:bg-cream-2 text-[12.5px] border border-line rounded-sm font-semibold tracking-wide transition-colors cursor-pointer flex items-center justify-center gap-2"
                   >
-                    pmrgsolutions@upi 📋
+                    <span>shrikamalini@upi</span>
+                    <Copy size={13} className="stroke-[1.8]" />
                   </button>
                 </div>
               </div>
@@ -130,7 +133,7 @@ export default function PaymentPage({ onComplete }) {
                   </div>
                   <div>
                     <span className="block text-[10.5px] uppercase tracking-wider text-charcoal/40 font-medium">Account Name</span>
-                    <strong className="text-[13.5px] text-charcoal font-serif">PMRG Solution Studio</strong>
+                    <strong className="text-[13.5px] text-charcoal font-serif">Shrikamalini Studio</strong>
                   </div>
                   <div>
                     <span className="block text-[10.5px] uppercase tracking-wider text-charcoal/40 font-medium">Account Number</span>
@@ -151,9 +154,10 @@ export default function PaymentPage({ onComplete }) {
                     navigator.clipboard.writeText("A/C: 50200067382109, IFSC: HDFC0000003");
                     showToast("Bank details copied!");
                   }}
-                  className="w-full py-2 bg-cream hover:bg-cream-2 text-[12.5px] border border-line rounded-sm font-semibold tracking-wide transition-colors cursor-pointer"
+                  className="w-full py-2 bg-cream hover:bg-cream-2 text-[12.5px] border border-line rounded-sm font-semibold tracking-wide transition-colors cursor-pointer flex items-center justify-center gap-2"
                 >
-                  Copy Account Info
+                  <span>Copy Account Info</span>
+                  <Copy size={13} className="stroke-[1.8]" />
                 </button>
               </div>
 
@@ -208,14 +212,15 @@ export default function PaymentPage({ onComplete }) {
                 <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">
                   Upload Receipt Screenshot (Optional)
                 </label>
-                <div className="border border-dashed border-line p-4 rounded-sm text-center bg-cream-2/20">
+                <div className="border border-dashed border-line p-4 rounded-sm text-center bg-cream-2/20 flex flex-col items-center justify-center gap-2">
+                  <Upload size={20} className="text-charcoal/30 stroke-[1.8]" />
                   <input
                     type="file"
                     accept="image/*"
                     onChange={(e) => setForm({ ...form, file: e.target.files[0] })}
-                    className="text-xs text-charcoal/50 w-full"
+                    className="text-xs text-charcoal/50 w-full cursor-pointer"
                   />
-                  <span className="block text-[10px] text-charcoal/40 mt-1.5">PNG, JPG up to 5MB</span>
+                  <span className="block text-[10px] text-charcoal/40">PNG, JPG up to 5MB</span>
                 </div>
               </div>
 

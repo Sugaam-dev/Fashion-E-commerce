@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { ArrowLeft, Plus, Minus } from "lucide-react";
 import { useCart } from "../CartContext.jsx";
 import { PRODUCTS } from "../data/products.js";
 import ProductCard from "./ProductCard.jsx";
@@ -47,7 +48,8 @@ export default function ProductDetailsPage() {
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-[13px] tracking-widest uppercase font-semibold text-charcoal/60 hover:text-rust transition-colors cursor-pointer"
         >
-          ← Back to Collections
+          <ArrowLeft size={14} className="stroke-[2.2]" />
+          <span>Back to Collections</span>
         </button>
       </div>
 
@@ -165,16 +167,18 @@ export default function ProductDetailsPage() {
             <div className="flex items-center border border-line bg-white h-12">
               <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
-                className="w-10 h-full text-lg font-medium cursor-pointer hover:bg-cream-2/30 transition-colors"
+                className="w-10 h-full flex items-center justify-center cursor-pointer hover:bg-cream-2/30 transition-colors"
+                title="Decrease quantity"
               >
-                −
+                <Minus size={14} className="stroke-[2.2]" />
               </button>
               <span className="w-10 text-center text-sm font-semibold">{qty}</span>
               <button
                 onClick={() => setQty((q) => q + 1)}
-                className="w-10 h-full text-lg font-medium cursor-pointer hover:bg-cream-2/30 transition-colors"
+                className="w-10 h-full flex items-center justify-center cursor-pointer hover:bg-cream-2/30 transition-colors"
+                title="Increase quantity"
               >
-                +
+                <Plus size={14} className="stroke-[2.2]" />
               </button>
             </div>
 

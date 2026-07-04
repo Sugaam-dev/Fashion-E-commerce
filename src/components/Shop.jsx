@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Search, X, SlidersHorizontal } from "lucide-react";
 import { PRODUCTS } from "../data/products.js";
 import ProductCard from "./ProductCard.jsx";
 
@@ -62,13 +63,15 @@ export default function Shop({ filter, setFilter }) {
               placeholder="Search by name..."
               className="w-full pl-9 pr-8 py-2.5 border border-line bg-white text-xs outline-none focus:border-rust transition-colors"
             />
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-charcoal/40 text-xs">🔍</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-charcoal/40">
+              <Search size={14} className="stroke-[1.8]" />
+            </span>
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-charcoal/50 hover:text-rust text-sm cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-charcoal/50 hover:text-rust cursor-pointer flex items-center"
               >
-                ×
+                <X size={14} className="stroke-[1.8]" />
               </button>
             )}
           </div>
@@ -166,9 +169,10 @@ export default function Shop({ filter, setFilter }) {
           <span className="text-sm text-charcoal/50 font-medium">{items.length} products found</span>
           <button
             onClick={() => setMobileFiltersOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 border border-line rounded-full text-[11.5px] font-bold uppercase tracking-wider bg-white hover:border-rust transition-colors cursor-pointer"
+            className="flex items-center gap-2.5 px-4.5 py-2.5 border border-line rounded-full text-[11px] font-bold uppercase tracking-wider bg-white hover:border-rust hover:text-rust transition-colors cursor-pointer"
           >
-            Filters ⚙️
+            <SlidersHorizontal size={13} className="stroke-[1.8]" />
+            <span>Filters</span>
           </button>
         </div>
 
@@ -190,7 +194,7 @@ export default function Shop({ filter, setFilter }) {
 
             {items.length === 0 ? (
               <div className="text-center py-24 text-charcoal/50 bg-cream-2/10 border border-dashed border-line">
-                <span className="text-4xl block mb-4">🔍</span>
+                <Search size={36} className="mx-auto text-charcoal/30 mb-4 stroke-[1.5]" />
                 <p className="text-sm font-medium">No products match your search criteria.</p>
                 <button
                   onClick={handleResetFilters}
@@ -228,9 +232,9 @@ export default function Shop({ filter, setFilter }) {
                 <h3 className="font-serif text-xl font-bold text-charcoal">Filter Catalog</h3>
                 <button
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="text-2xl leading-none text-charcoal/40 hover:text-rust cursor-pointer"
+                  className="text-charcoal/50 hover:text-rust cursor-pointer flex items-center justify-center w-8 h-8 rounded-full hover:bg-cream-2/40 transition-colors"
                 >
-                  ×
+                  <X size={20} className="stroke-[1.8]" />
                 </button>
               </div>
               <FilterContent />

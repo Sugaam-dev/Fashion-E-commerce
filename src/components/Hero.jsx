@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-export default function Hero({ setCurrentPage }) {
+export default function Hero() {
   const slides = [
     {
       image: "https://img.magnific.com/premium-photo/world-saree-day-copy-space-background_548646-56572.jpg?semt=ais_hybrid&w=740&q=80",
-      title: "PMRG Silk Sarees",
+      title: "Shrikamalini Silk Sarees",
       subtitle: "Exquisite slub silk and traditional drapes crafted for modern elegance.",
       cta: "Shop Sarees",
       link: "#shop"
@@ -61,15 +62,12 @@ export default function Hero({ setCurrentPage }) {
             <p className="text-[14px] md:text-[17px] text-cream/80 max-w-lg mb-8 font-light tracking-wide leading-relaxed">
               {slide.subtitle}
             </p>
-            <button
-              onClick={() => {
-                setCurrentPage("product");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="px-8 py-3.5 bg-white text-charcoal hover:bg-rust hover:text-white text-[12.5px] tracking-[0.12em] uppercase font-semibold transition-colors duration-300 shadow-md cursor-pointer"
+            <Link
+              to="/product"
+              className="px-8 py-3.5 bg-white text-charcoal hover:bg-rust hover:text-white text-[12.5px] tracking-[0.12em] uppercase font-semibold transition-colors duration-300 shadow-md cursor-pointer inline-block"
             >
               {slide.cta}
-            </button>
+            </Link>
           </div>
         </div>
       ))}

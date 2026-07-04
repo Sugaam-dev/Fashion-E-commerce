@@ -28,7 +28,7 @@ export default function AboutPage() {
               Every thread carries the whisper of an artisan weaver.
             </h2>
             <p className="text-[15px] leading-relaxed text-charcoal/70 mb-6">
-              PMRG Solution was founded with a single mission: to create contemporary ethnic designs 
+              Shrikamalini was founded with a single mission: to create contemporary ethnic designs 
               for women while preserving traditional Indian weaving techniques. We partner directly 
               with small-batch weavers across the country, selecting pure slub silks, raw cottons, 
               and organic linens.
@@ -44,7 +44,7 @@ export default function AboutPage() {
         {/* Section 2: Core Values Grid */}
         <div className="bg-cream-2/40 border-t border-b border-line py-16 md:py-20 mb-20 md:mb-32">
           <h3 className="font-serif text-2xl md:text-3xl font-semibold text-center text-charcoal mb-12">
-            The Pillars of PMRG Solution
+            The Pillars of Shrikamalini
           </h3>
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             <div className="text-center px-4">

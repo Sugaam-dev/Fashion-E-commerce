@@ -43,20 +43,20 @@ export default function ContactPage() {
                 <div>
                   <h4 className="font-serif text-base font-bold text-charcoal">WhatsApp Direct</h4>
                   <a
-                    href="https://wa.me/9861812277"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-rust font-semibold hover:underline"
-                  >
-                    +91 98618 12277
-                  </a>
+                  href="https://wa.me/919820001128?text=Hello%20Shrikamalini,%20I%20would%20like%20to%20schedule%20a%20made-to-measure%20stylist%20consultation."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-rust font-semibold hover:underline"
+                >
+                  +91 98200 01128
+                </a>
                 </div>
               </div>
               <div className="flex gap-4">
                 <span className="text-2xl">✉️</span>
                 <div>
                   <h4 className="font-serif text-base font-bold text-charcoal">Email Support</h4>
-                  <p className="text-sm text-charcoal/70">support@pmrgsolutions.com</p>
+                  <p className="text-sm text-charcoal/70">support@shrikamalini.com</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -64,7 +64,7 @@ export default function ContactPage() {
                 <div>
                   <h4 className="font-serif text-base font-bold text-charcoal">Design Studio Office</h4>
                   <p className="text-sm text-charcoal/70 leading-relaxed">
-                    PMRG Solution
+                    Shrikamalini Studio
                   </p>
                 </div>
               </div>

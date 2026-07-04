@@ -40,7 +40,6 @@ export default function App() {
               element={
                 <HomePage
                   onCategorySelect={handleCategorySelect}
-                  setCurrentPage={(page) => navigate(page === "product" ? "/product" : "/")}
                 />
               }
             />

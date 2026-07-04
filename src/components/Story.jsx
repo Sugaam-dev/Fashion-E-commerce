@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Story() {
   return (
     <section id="story" className="py-16 md:py-24">
@@ -12,7 +14,7 @@ export default function Story() {
 
         <div>
           <span className="block text-xs tracking-[0.2em] uppercase text-rust mb-4 font-semibold">
-            Why PMRG Solution
+            Why Shrikamalini
           </span>
           <h2 className="font-serif font-medium text-[28px] md:text-[42px] leading-tight mb-6">
             Every piece begins with a fabric story, not a fast trend.
@@ -22,12 +24,12 @@ export default function Story() {
             mulmuls and modal blends that breathe in the heat and soften with
             every wash. No two dye lots are quite the same — and that's the point.
           </p>
-          <a
-            href="#shop"
+          <Link
+            to="/product"
             className="inline-block px-8 py-4 text-[13px] tracking-[0.1em] uppercase border border-charcoal hover:bg-charcoal hover:text-cream transition-colors"
           >
             Explore The Collection
-          </a>
+          </Link>
           <div className="flex gap-10 mt-9">
             <div>
               <b className="font-serif text-[34px] block text-rust-deep">40+</b>

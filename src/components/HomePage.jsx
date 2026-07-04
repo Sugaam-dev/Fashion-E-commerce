@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Hero from "./Hero.jsx";
 import Marquee from "./Marquee.jsx";
 import Categories from "./Categories.jsx";
@@ -7,13 +8,13 @@ import Story from "./Story.jsx";
 import ProductCard from "./ProductCard.jsx";
 import { PRODUCTS } from "../data/products.js";
 
-export default function HomePage({ onCategorySelect, setCurrentPage }) {
+export default function HomePage({ onCategorySelect }) {
   const featuredProducts = PRODUCTS.filter((p) => p.tag === "Bestseller" || p.tag === "New" || p.tag === "Premium").slice(0, 8);
 
   const reviews = [
     {
       name: "Ananya Sharma",
-      quote: "The slub silk saree is drop-dead gorgeous. The custom tailoring fit perfectly. PMRG Solution has a client for life!",
+      quote: "The slub silk saree is drop-dead gorgeous. The custom tailoring fit perfectly. Shrikamalini has a client for life!",
       avatar: "https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&w=150&h=150&q=80",
       item: "Meera Slub Silk Saree"
     },
@@ -33,7 +34,7 @@ export default function HomePage({ onCategorySelect, setCurrentPage }) {
 
   return (
     <div>
-      <Hero setCurrentPage={setCurrentPage} />
+      <Hero />
       <Marquee />
       <Categories onSelect={onCategorySelect} />
 
@@ -48,12 +49,12 @@ export default function HomePage({ onCategorySelect, setCurrentPage }) {
               <h2 className="font-serif font-medium text-3xl md:text-5xl text-charcoal mb-2">Loved This Season</h2>
               <p className="text-sm text-charcoal/50 font-normal">Hand-woven sarees, royal kundan jewellery, and custom heritage accessories.</p>
             </div>
-            <button
-              onClick={() => setCurrentPage("product")}
+            <Link
+              to="/product"
               className="text-[13px] tracking-widest uppercase border-b border-charcoal pb-0.5 font-bold hover:text-rust hover:border-rust transition-colors cursor-pointer"
             >
               View All Products →
-            </button>
+            </Link>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
@@ -72,7 +73,7 @@ export default function HomePage({ onCategorySelect, setCurrentPage }) {
         <div className="max-w-[1280px] mx-auto px-6 md:px-10">
           <div className="text-center max-w-xl mx-auto mb-16">
             <span className="text-xs tracking-[0.22em] uppercase text-rust font-semibold block mb-3">
-              #PMRGDivas Speaks
+              #ShrikamaliniDivas Speaks
             </span>
             <h2 className="font-serif font-medium text-3xl md:text-5xl text-charcoal">
               Loved by Elegant Women

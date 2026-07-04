@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Heart } from "lucide-react";
 import { useCart } from "../CartContext.jsx";
 
 export default function ProductCard({ product }) {
@@ -27,11 +28,9 @@ export default function ProductCard({ product }) {
             e.stopPropagation();
             toggleWish(product.id);
           }}
-          className={`absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center text-[15px] opacity-0 -translate-y-1.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all hover:scale-110 cursor-pointer ${
-            isWished ? "text-rust" : "text-charcoal"
-          }`}
+          className="absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center opacity-0 -translate-y-1.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all hover:scale-110 cursor-pointer"
         >
-          {isWished ? "♥" : "♡"}
+          <Heart size={14} className={isWished ? "fill-rust text-rust stroke-[2.2]" : "text-charcoal stroke-[1.8]"} />
         </button>
 
         <Link to={`/details/${product.id}`} className="absolute inset-0 block">

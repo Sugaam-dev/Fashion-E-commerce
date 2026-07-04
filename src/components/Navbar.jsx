@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react";
 import { useCart } from "../CartContext.jsx";
 
 export default function Navbar() {
@@ -29,17 +30,17 @@ export default function Navbar() {
       </div>
 
       <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-line">
-       <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-1.5">
-  <Link
-    to="/"
-    className="flex items-center hover:opacity-90"
-  >
-    <img
-      src="/logo.jpeg"
-      alt="PMRG Solution Logo"
-      className="h-22 w-auto"
-    />
-  </Link>
+        <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-1.5">
+          <Link 
+            to="/" 
+            className="flex items-center hover:opacity-90"
+          >
+            <img
+              src="/shrikamaliniLogo.png"
+              alt="Shrikamalini Logo"
+              className="h-22 w-auto"
+            />
+          </Link>
           <div className="hidden lg:flex gap-8 text-[13px] tracking-[0.08em] uppercase font-medium">
             {navItems.map((item) => (
               item.isLogin ? (
@@ -67,24 +68,36 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center gap-5">
-            <button title="Search" className="text-lg hover:text-rust transition-colors cursor-pointer">🔍</button>
-            <button title="Wishlist" className="text-lg hover:text-rust transition-colors cursor-pointer">♡</button>
+          <div className="flex items-center gap-5.5 text-charcoal">
+            <button
+              title="Search"
+              className="hover:text-rust transition-colors cursor-pointer"
+              onClick={() => showToast("Search workspace activated! (Mock)")}
+            >
+              <Search size={18} className="stroke-[1.85]" />
+            </button>
+            <button
+              title="Wishlist"
+              className="hover:text-rust transition-colors cursor-pointer"
+              onClick={() => showToast("Wishlist view activated! (Mock)")}
+            >
+              <Heart size={18} className="stroke-[1.85]" />
+            </button>
             <button
               title="Bag"
               onClick={() => setDrawerOpen(true)}
-              className="relative text-lg hover:text-rust transition-colors cursor-pointer"
+              className="relative hover:text-rust transition-colors cursor-pointer"
             >
-              👜
-              <span className="absolute -top-2 -right-2.5 bg-rust text-white text-[10px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center">
+              <ShoppingBag size={18} className="stroke-[1.85]" />
+              <span className="absolute -top-1.5 -right-2 bg-rust text-white text-[9.5px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {count}
               </span>
             </button>
             <button
-              className="lg:hidden text-xl cursor-pointer"
+              className="lg:hidden cursor-pointer flex items-center"
               onClick={() => setMobileOpen((v) => !v)}
             >
-              ☰
+              {mobileOpen ? <X size={20} className="stroke-[1.85]" /> : <Menu size={20} className="stroke-[1.85]" />}
             </button>
           </div>
         </nav>
