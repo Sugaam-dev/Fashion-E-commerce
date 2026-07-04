@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MessageCircle, Mail, MapPin, Send } from "lucide-react";
 import { useCart } from "../CartContext.jsx";
 
 export default function ContactPage() {
@@ -38,29 +39,35 @@ export default function ContactPage() {
             </p>
 
             <div className="space-y-6 mb-10">
-              <div className="flex gap-4">
-                <span className="text-2xl">💬</span>
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-rust/10 flex items-center justify-center text-rust flex-shrink-0">
+                  <MessageCircle size={18} className="stroke-[1.8]" />
+                </div>
                 <div>
                   <h4 className="font-serif text-base font-bold text-charcoal">WhatsApp Direct</h4>
                   <a
-                  href="https://wa.me/919820001128?text=Hello%20Shrikamalini,%20I%20would%20like%20to%20schedule%20a%20made-to-measure%20stylist%20consultation."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-rust font-semibold hover:underline"
-                >
-                  +91 98200 01128
-                </a>
+                    href="https://wa.me/919820001138?text=Hello%20Shrikamalini,%20I%20would%20like%20to%20schedule%20a%20made-to-measure%20stylist%20consultation."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-rust font-semibold hover:underline"
+                  >
+                    +91 98200 01138
+                  </a>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <span className="text-2xl">✉️</span>
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-rust/10 flex items-center justify-center text-rust flex-shrink-0">
+                  <Mail size={18} className="stroke-[1.8]" />
+                </div>
                 <div>
                   <h4 className="font-serif text-base font-bold text-charcoal">Email Support</h4>
                   <p className="text-sm text-charcoal/70">support@shrikamalini.com</p>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <span className="text-2xl">📍</span>
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-rust/10 flex items-center justify-center text-rust flex-shrink-0">
+                  <MapPin size={18} className="stroke-[1.8]" />
+                </div>
                 <div>
                   <h4 className="font-serif text-base font-bold text-charcoal">Design Studio Office</h4>
                   <p className="text-sm text-charcoal/70 leading-relaxed">
@@ -129,9 +136,10 @@ export default function ContactPage() {
               </div>
               <button
                 type="submit"
-                className="w-full py-4 bg-rust hover:bg-rust-deep text-white text-[12.5px] tracking-widest uppercase font-semibold shadow-md transition-colors cursor-pointer"
+                className="w-full py-4 bg-rust hover:bg-rust-deep text-white text-[12.5px] tracking-widest uppercase font-semibold shadow-md transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
-                Send Message
+                <span>Send Message</span>
+                <Send size={13} className="stroke-[2.2]" />
               </button>
             </form>
           </div>
