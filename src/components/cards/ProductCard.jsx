@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
-import { useCart } from "../CartContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 export default function ProductCard({ product }) {
   const { toggleWish, wishlist } = useCart();

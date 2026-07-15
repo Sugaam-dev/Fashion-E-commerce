@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MessageCircle, Mail, MapPin, Send } from "lucide-react";
-import { useCart } from "../CartContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 export default function ContactPage() {
   const { showToast } = useCart();

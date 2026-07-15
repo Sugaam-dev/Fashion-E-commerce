@@ -1,4 +1,4 @@
-import { CATEGORIES } from "../data/products.js";
+import { CATEGORIES } from "../../data/products/products.js";
 
 export default function Categories({ onSelect }) {
   return (

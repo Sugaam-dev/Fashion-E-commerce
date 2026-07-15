@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Landmark, Copy, Upload, ArrowLeft } from "lucide-react";
-import { useCart } from "../CartContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 export default function PaymentPage({ onComplete }) {
   const { cart, clearCart, showToast } = useCart();

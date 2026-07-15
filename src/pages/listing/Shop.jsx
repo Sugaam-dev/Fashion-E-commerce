@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Search, X, SlidersHorizontal } from "lucide-react";
-import { PRODUCTS } from "../data/products.js";
-import ProductCard from "./ProductCard.jsx";
+import { PRODUCTS } from "../../data/products/products.js";
+import ProductCard from "../../components/cards/ProductCard.jsx";
 
 export default function Shop({ filter, setFilter }) {
   const [sort, setSort] = useState("featured");

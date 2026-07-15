@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import Hero from "./Hero.jsx";
-import Marquee from "./Marquee.jsx";
+import Marquee from "../../components/ui/Marquee.jsx";
 import Categories from "./Categories.jsx";
 import CustomSection from "./CustomSection.jsx";
 import Story from "./Story.jsx";
 // import Newsletter from "./Newsletter.jsx";
-import ProductCard from "./ProductCard.jsx";
-import { PRODUCTS } from "../data/products.js";
+import ProductCard from "../../components/cards/ProductCard.jsx";
+import { PRODUCTS } from "../../data/products/products.js";
 
 export default function HomePage({ onCategorySelect }) {
   const featuredProducts = PRODUCTS.filter((p) => p.tag === "Bestseller" || p.tag === "New" || p.tag === "Premium").slice(0, 8);

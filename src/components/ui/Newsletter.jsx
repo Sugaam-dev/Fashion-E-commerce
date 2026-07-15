@@ -1,4 +1,4 @@
-import { useCart } from "../CartContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 export default function Newsletter() {
   const { showToast } = useCart();

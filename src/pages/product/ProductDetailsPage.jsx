@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Plus, Minus } from "lucide-react";
-import { useCart } from "../CartContext.jsx";
-import { PRODUCTS } from "../data/products.js";
-import ProductCard from "./ProductCard.jsx";
+import { useCart } from "../../context/CartContext.jsx";
+import { PRODUCTS } from "../../data/products/products.js";
+import ProductCard from "../../components/cards/ProductCard.jsx";
 
 export default function ProductDetailsPage() {
   const { id } = useParams();

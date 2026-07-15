@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react";
-import { useCart } from "../CartContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 export default function Navbar() {
   const { cart, setDrawerOpen, showToast } = useCart();
