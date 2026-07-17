@@ -14,7 +14,7 @@ export default function Navbar() {
     { label: "About", path: "/about" },
     { label: "Product", path: "/product" },
     { label: "Contact", path: "/contact" },
-    { label: "Login", path: "/login", isLogin: true }
+    //{ label: "Login", path: "/login", isLogin: true }
   ];
 
   function handleLoginClick(e) {

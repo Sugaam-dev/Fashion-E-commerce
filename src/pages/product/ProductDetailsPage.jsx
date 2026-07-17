@@ -13,7 +13,7 @@ export default function ProductDetailsPage() {
   const product = PRODUCTS.find((p) => p.id === parseInt(id));
 
   const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || "");
-  const [selectedSize, setSelectedSize] = useState("M");
+  const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || "");
   const [customFit, setCustomFit] = useState(false);
   const [qty, setQty] = useState(1);
 
@@ -29,9 +29,19 @@ export default function ProductDetailsPage() {
   const relatedProducts = PRODUCTS.filter((p) => p.cat === product.cat && p.id !== product.id).slice(0, 4);
 
   function handleAddToBag() {
+    const options = [];
+    if (product.sizes && product.sizes.length > 0 && selectedSize) {
+      options.push(selectedSize);
+    }
+    if (customFit) {
+      options.push("Custom Fit");
+    }
+
+    const nameSuffix = options.length > 0 ? ` (${options.join(" · ")})` : "";
+
     const productWithOpts = {
       ...product,
-      name: `${product.name} (${selectedSize}${customFit ? " · Custom Fit" : ""})`,
+      name: `${product.name}${nameSuffix}`,
       price: customFit ? product.price + 499 : product.price,
     };
     
@@ -68,7 +78,7 @@ export default function ProductDetailsPage() {
         <div className="flex flex-col justify-between">
           <div>
             <span className="block text-[11px] text-rust uppercase tracking-[0.2em] font-semibold mb-2">
-              {product.cat} · {product.season} Edit
+               {product.cat}{product.subcat ? ` · ${product.subcat}` : ''} · {product.season}
             </span>
             <h1 className="font-serif text-3xl md:text-5xl font-semibold mb-4 leading-tight text-charcoal">
               {product.name}
@@ -110,35 +120,37 @@ export default function ProductDetailsPage() {
               </div>
             </div>
 
-            {/* Sizes */}
-            <div className="mb-6 pb-6 border-b border-line">
-              <div className="flex justify-between items-baseline mb-3">
-                <span className="text-xs uppercase tracking-widest text-charcoal/50 font-semibold">
-                  Select Size Option
-                </span>
-                <button
-                  onClick={() => alert("Size guide opened (Mock).")}
-                  className="text-[11px] text-rust underline hover:text-rust-deep cursor-pointer font-medium"
-                >
-                  Size Guide
-                </button>
-              </div>
-              <div className="flex flex-wrap gap-2.5">
-                {["XS", "S", "M", "L", "XL", "XXL"].map((sz) => (
-                  <button
-                    key={sz}
-                    onClick={() => setSelectedSize(sz)}
-                    className={`w-12 h-10 border text-xs tracking-widest font-semibold flex items-center justify-center transition-all cursor-pointer ${
-                      selectedSize === sz
-                        ? "bg-charcoal text-cream border-charcoal shadow-sm"
-                        : "border-line text-charcoal/60 hover:border-charcoal bg-white"
-                    }`}
-                  >
-                    {sz}
-                  </button>
-                ))}
-              </div>
-            </div>
+{/* Sizes */}
+{product.sizes && product.sizes.length > 0 && (
+  <div className="mb-6 pb-6 border-b border-line">
+    <div className="flex justify-between items-baseline mb-3">
+      <span className="text-xs uppercase tracking-widest text-charcoal/50 font-semibold">
+        Select Size Option
+      </span>
+      <button
+        onClick={() => alert("Size guide opened (Mock).")}
+        className="text-[11px] text-rust underline hover:text-rust-deep cursor-pointer font-medium"
+      >
+        Size Guide
+      </button>
+    </div>
+    <div className="flex flex-wrap gap-2.5">
+      {product.sizes.map((sz) => (
+        <button
+          key={sz}
+          onClick={() => setSelectedSize(sz)}
+          className={`w-12 h-10 border text-xs tracking-widest font-semibold flex items-center justify-center transition-all cursor-pointer ${
+            selectedSize === sz
+              ? "bg-charcoal text-cream border-charcoal shadow-sm"
+              : "border-line text-charcoal/60 hover:border-charcoal bg-white"
+          }`}
+        >
+          {sz}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
 
             {/* Custom fit widget (O4Orange customization style) */}
             <div className="mb-8 bg-cream-2 p-4 rounded-sm border border-line">

@@ -1,0 +1,29 @@
+import { Link } from "react-router-dom";
+
+export default function SubcategoryCard({ catName, subcatName, image }) {
+  return (
+    <div className="group flex-none" style={{ width: "calc(25% - 12px)" }}>
+      <Link
+        to={`/product?category=${encodeURIComponent(catName)}&subcat=${encodeURIComponent(subcatName)}`}
+        className="relative block aspect-[3/4] overflow-hidden rounded-sm shadow-sm"
+      >
+        <img
+          src={image}
+          alt={subcatName}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = `https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80`;
+          }}
+        />
+        <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300" />
+        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/55 to-transparent text-white">
+          <div className="font-serif text-[15px] font-semibold">{subcatName}</div>
+          <span className="block text-[9px] tracking-[0.12em] uppercase opacity-85 font-sans font-light mt-0.5">
+            Explore Collection →
+          </span>
+        </div>
+      </Link>
+    </div>
+  );
+}

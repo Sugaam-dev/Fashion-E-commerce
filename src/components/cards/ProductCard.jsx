@@ -50,24 +50,6 @@ export default function ProductCard({ product }) {
         <Link to={`/details/${product.id}`} className="hover:text-rust transition-colors block">
           <div className="text-[15px] mb-1 font-semibold text-charcoal">{product.name}</div>
         </Link>
-        <div className="text-[11px] text-charcoal/50 uppercase tracking-widest mb-2 font-medium">{product.cat} · {product.season}</div>
-        <div className="flex items-center gap-2.5">
-          <span className="text-[15px] font-semibold text-rust">₹{product.price.toLocaleString("en-IN")}</span>
-          {product.mrp && (
-            <span className="text-[12.5px] text-charcoal/40 line-through">
-              ₹{product.mrp.toLocaleString("en-IN")}
-            </span>
-          )}
-        </div>
-        <div className="flex gap-1.5 mt-2.5">
-          {product.colors.map((c, i) => (
-            <span
-              key={i}
-              className="w-3 h-3 rounded-full border border-black/10"
-              style={{ background: c }}
-            />
-          ))}
-        </div>
       </div>
     </div>
   );

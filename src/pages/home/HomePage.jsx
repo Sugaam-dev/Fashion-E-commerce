@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import CategoryCarousel from "./CategoryCarousel";
 import Hero from "./Hero.jsx";
 import Marquee from "../../components/ui/Marquee.jsx";
 import Categories from "./Categories.jsx";
@@ -6,9 +7,10 @@ import CustomSection from "./CustomSection.jsx";
 import Story from "./Story.jsx";
 // import Newsletter from "./Newsletter.jsx";
 import ProductCard from "../../components/cards/ProductCard.jsx";
-import { PRODUCTS } from "../../data/products/products.js";
+import SubcategoryCard from "../../components/cards/SubcategoryCard.jsx";
+import { PRODUCTS, COLLECTION_CATEGORIES } from "../../data/products/products.js";
 
-export default function HomePage({ onCategorySelect }) {
+export default function HomePage() {
   const featuredProducts = PRODUCTS.filter((p) => p.tag === "Bestseller" || p.tag === "New" || p.tag === "Premium").slice(0, 8);
 
   const reviews = [
@@ -32,38 +34,45 @@ export default function HomePage({ onCategorySelect }) {
     }
   ];
 
+  // Build collection data grouping products by category and subcategory
+  const collectionData = COLLECTION_CATEGORIES.map((cat) => ({
+    ...cat,
+    subcatProducts: cat.subcats.map((subcat) => ({
+      subcat,
+      products: PRODUCTS.filter((p) => p.cat === cat.name && p.subcat === subcat).slice(0, 4)
+    }))
+  }));
+
   return (
     <div>
       <Hero />
       <Marquee />
-      <Categories onSelect={onCategorySelect} />
+      <Categories />
 
-      {/* Featured Bestsellers Grid */}
-      <section className="py-16 md:py-24 bg-cream">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10">
-          <div className="flex justify-between items-end flex-wrap gap-5 mb-12">
-            <div>
-              <span className="block text-xs tracking-[0.2em] uppercase text-rust mb-2 font-semibold">
-                Curated Collection
-              </span>
-              <h2 className="font-serif font-medium text-3xl md:text-5xl text-charcoal mb-2">Loved This Season</h2>
-              <p className="text-sm text-charcoal/50 font-normal">Hand-woven sarees, royal kundan jewellery, and custom heritage accessories.</p>
-            </div>
-            <Link
-              to="/product"
-              className="text-[13px] tracking-widest uppercase border-b border-charcoal pb-0.5 font-bold hover:text-rust hover:border-rust transition-colors cursor-pointer"
-            >
-              View All Products →
-            </Link>
-          </div>
+       {/* Featured Collection grouped by subcategory */}
+       <section className="py-16 md:py-24 bg-cream">
+         <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+           <div className="flex justify-between items-end flex-wrap gap-5 mb-12">
+             <div>
+               <span className="block text-xs tracking-[0.2em] uppercase text-rust mb-2 font-semibold">
+                 Curated Collection
+               </span>
+               <h2 className="font-serif font-medium text-3xl md:text-5xl text-charcoal mb-2">Loved This Season</h2>
+               <p className="text-sm text-charcoal/50 font-normal">Hand-woven sarees, royal kundan jewellery, and custom heritage accessories.</p>
+             </div>
+             <Link
+               to="/product"
+               className="text-[13px] tracking-widest uppercase border-b border-charcoal pb-0.5 font-bold hover:text-rust hover:border-rust transition-colors cursor-pointer"
+             >
+               View All Products →
+             </Link>
+           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
-            {featuredProducts.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
-        </div>
-      </section>
+           {collectionData.map((cat) => (
+            <CategoryCarousel key={cat.name} cat={cat} />
+          ))}
+         </div>
+       </section>
 
       <CustomSection />
       <Story />
