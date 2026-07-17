@@ -9,6 +9,8 @@ export default function Navbar() {
   const location = useLocation();
   const count = cart.reduce((s, i) => s + i.qty, 0);
 
+  let Flashsale = false ;
+
   const navItems = [
     { label: "Home", path: "/" },
     { label: "About", path: "/about" },
@@ -25,9 +27,11 @@ export default function Navbar() {
 
   return (
     <>
+    {Flashsale &&
       <div className="bg-charcoal text-cream/95 text-[11.5px] tracking-[0.15em] uppercase text-center py-2.5 px-2 font-medium">
         ✨ Festive Edit Live — Customize Any Outfit — Free Shipping over ₹1,499 ✨
       </div>
+}
 
       <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-line">
         <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-1.5">

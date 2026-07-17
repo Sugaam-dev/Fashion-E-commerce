@@ -39,7 +39,12 @@ export default function HomePage() {
     ...cat,
     subcatProducts: cat.subcats.map((subcat) => ({
       subcat,
-      products: PRODUCTS.filter((p) => p.cat === cat.name && p.subcat === subcat).slice(0, 4)
+      products: PRODUCTS.filter((p) => {
+        const catNameMatch = cat.name === "Accessories"
+          ? (p.cat === "Women Accessories" || p.cat === "Accessories")
+          : p.cat === cat.name;
+        return catNameMatch && p.subcat === subcat;
+      }).slice(0, 4)
     }))
   }));
 

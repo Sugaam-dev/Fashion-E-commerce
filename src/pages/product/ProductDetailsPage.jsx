@@ -14,7 +14,6 @@ export default function ProductDetailsPage() {
 
   const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || "");
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || "");
-  const [customFit, setCustomFit] = useState(false);
   const [qty, setQty] = useState(1);
 
   if (!product) {
@@ -33,16 +32,13 @@ export default function ProductDetailsPage() {
     if (product.sizes && product.sizes.length > 0 && selectedSize) {
       options.push(selectedSize);
     }
-    if (customFit) {
-      options.push("Custom Fit");
-    }
 
     const nameSuffix = options.length > 0 ? ` (${options.join(" · ")})` : "";
 
     const productWithOpts = {
       ...product,
       name: `${product.name}${nameSuffix}`,
-      price: customFit ? product.price + 499 : product.price,
+      price: product.price,
     };
     
     for (let i = 0; i < qty; i++) {
@@ -87,7 +83,7 @@ export default function ProductDetailsPage() {
             {/* Price section */}
             <div className="flex items-baseline gap-4 mb-8">
               <span className="text-2xl md:text-3xl font-bold text-charcoal">
-                ₹{(customFit ? product.price + 499 : product.price).toLocaleString("en-IN")}
+                ₹{product.price.toLocaleString("en-IN")}
               </span>
               {product.mrp && (
                 <span className="text-base text-charcoal/30 line-through">
@@ -152,26 +148,6 @@ export default function ProductDetailsPage() {
   </div>
 )}
 
-            {/* Custom fit widget (O4Orange customization style) */}
-            <div className="mb-8 bg-cream-2 p-4 rounded-sm border border-line">
-              <label className="flex items-start gap-4 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={customFit}
-                  onChange={(e) => setCustomFit(e.target.checked)}
-                  className="w-5 h-5 mt-0.5 accent-rust cursor-pointer"
-                />
-                <div>
-                  <span className="font-serif text-[15px] font-semibold text-charcoal block mb-0.5">
-                    Request Custom Tailoring (+₹499)
-                  </span>
-                  <p className="text-[12.5px] leading-relaxed text-charcoal/60">
-                    Get custom blouses (necklines, sleeve fits) or customized lengths on sarees/accessories. 
-                    Our design team will reach out directly on WhatsApp to collect your measurements.
-                  </p>
-                </div>
-              </label>
-            </div>
           </div>
 
           {/* Add to cart block */}

@@ -46,10 +46,20 @@ export default function ProductCard({ product }) {
         </Link>
       </div>
 
-      <div>
+      <div className="flex flex-col gap-0.5">
         <Link to={`/details/${product.id}`} className="hover:text-rust transition-colors block">
-          <div className="text-[15px] mb-1 font-semibold text-charcoal">{product.name}</div>
+          <div className="text-[15px] font-semibold text-charcoal leading-tight">{product.name}</div>
         </Link>
+        <div className="flex items-center gap-2 mt-0.5">
+          <span className="text-sm font-semibold text-charcoal">
+            ₹{product.price.toLocaleString("en-IN")}
+          </span>
+          {product.mrp && product.mrp > product.price && (
+            <span className="text-xs text-charcoal/35 line-through">
+              ₹{product.mrp.toLocaleString("en-IN")}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
