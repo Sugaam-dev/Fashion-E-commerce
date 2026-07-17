@@ -1,83 +1,161 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import SubcategoryCard from "../../components/cards/SubcategoryCard.jsx";
 
 export default function CategoryCarousel({ cat }) {
+  const isStatic = cat.name === "Readymade" || cat.name === "Accessories";
   const scrollRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  const isHovered = useRef(false);
+  const isTouching = useRef(false);
+  const scrollSpeed = 35; // Pixels per second (comfortable slow speed)
 
-  const updateArrows = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
-  };
+  const N = cat.subcatProducts.length;
 
+  // Initialize scroll position to the start of the second group (W) for infinite left/right scrolling
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    updateArrows();
-    el.addEventListener("scroll", updateArrows);
-    window.addEventListener("resize", updateArrows);
-    return () => {
-      el.removeEventListener("scroll", updateArrows);
-      window.removeEventListener("resize", updateArrows);
-    };
-  }, []);
+    if (N === 0 || isStatic) return;
+    const container = scrollRef.current;
+    if (!container) return;
 
-  const scroll = (dir) => {
-    if (scrollRef.current) {
-      const step = scrollRef.current.clientWidth;
-      scrollRef.current.scrollBy({ left: dir * step, behavior: "smooth" });
+    const initScroll = () => {
+      const children = container.children;
+      if (children && children.length >= N * 2) {
+        const firstChild = children[0];
+        const repeatStartChild = children[N];
+        if (firstChild && repeatStartChild) {
+          const W = repeatStartChild.offsetLeft - firstChild.offsetLeft;
+          if (W > 0) {
+            container.scrollLeft = W;
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    if (!initScroll()) {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (initScroll() || attempts > 15) {
+          clearInterval(interval);
+        }
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [N, isStatic]);
+
+  // RequestAnimationFrame loop for high-performance auto-scrolling (bypassing React re-renders)
+  useEffect(() => {
+    if (N === 0 || isStatic) return;
+    const container = scrollRef.current;
+    if (!container) return;
+
+    let animationFrameId;
+    let lastTime = performance.now();
+
+    const animate = (time) => {
+      const delta = (time - lastTime) / 1000;
+      lastTime = time;
+
+      if (!isHovered.current && !isTouching.current) {
+        const children = container.children;
+        if (children && children.length >= N * 2) {
+          const firstChild = children[0];
+          const repeatStartChild = children[N];
+          if (firstChild && repeatStartChild) {
+            const W = repeatStartChild.offsetLeft - firstChild.offsetLeft;
+            if (W > 0) {
+              let newScrollLeft = container.scrollLeft + scrollSpeed * delta;
+              
+              // Normalize scrollLeft to keep it inside the middle loop [W, 2W)
+              if (newScrollLeft >= W * 2) {
+                newScrollLeft -= W;
+              } else if (newScrollLeft < W) {
+                newScrollLeft += W;
+              }
+              container.scrollLeft = newScrollLeft;
+            }
+          }
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [N, isStatic]);
+
+  // Normalize scroll position during manual interaction (touches/wheel) when not active
+  const handleScroll = () => {
+    if (N === 0 || isStatic) return;
+    const container = scrollRef.current;
+    if (!container || isTouching.current) return;
+
+    const children = container.children;
+    if (children && children.length >= N * 2) {
+      const firstChild = children[0];
+      const repeatStartChild = children[N];
+      if (firstChild && repeatStartChild) {
+        const W = repeatStartChild.offsetLeft - firstChild.offsetLeft;
+        if (W > 0) {
+          if (container.scrollLeft >= W * 2) {
+            container.scrollLeft -= W;
+          } else if (container.scrollLeft < W) {
+            container.scrollLeft += W;
+          }
+        }
+      }
     }
   };
 
-  const hasMore = (canScrollLeft || canScrollRight);
+  const handleTouchEnd = () => {
+    isTouching.current = false;
+    handleScroll();
+  };
 
   return (
     <div className="mb-12">
       <h3 className="text-2xl font-semibold text-charcoal mb-4">{cat.name}</h3>
       <div className="relative">
-        {/* Left Arrow */}
-        {canScrollLeft && (
-          <button
-            onClick={() => scroll(-1)}
-            aria-label="Scroll left"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 border border-line rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-white hover:shadow-lg transition-all duration-200 -ml-5"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-        )}
-
-        {/* Cards Container — 4 visible at a time */}
+        {/* Cards Container — 3x duplicated list for infinite scrolling, static centering for Readymade/Accessories */}
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar"
+          className={`relative flex gap-4 overflow-x-auto no-scrollbar ${
+            isStatic ? "justify-start lg:justify-center" : ""
+          }`}
+          onMouseEnter={isStatic ? undefined : () => { isHovered.current = true; }}
+          onMouseLeave={isStatic ? undefined : () => { isHovered.current = false; }}
+          onTouchStart={isStatic ? undefined : () => { isTouching.current = true; }}
+          onTouchEnd={isStatic ? undefined : handleTouchEnd}
+          onTouchCancel={isStatic ? undefined : handleTouchEnd}
+          onScroll={isStatic ? undefined : handleScroll}
         >
-          {cat.subcatProducts.map((sp) => (
-            <SubcategoryCard
-              key={sp.subcat}
-              catName={cat.name}
-              subcatName={sp.subcat}
-              image={sp.products[0]?.image || ""}
-            />
-          ))}
+          {isStatic ? (
+            cat.subcatProducts.map((sp) => (
+              <SubcategoryCard
+                key={sp.subcat}
+                catName={cat.name}
+                subcatName={sp.subcat}
+                image={sp.products[0]?.image || ""}
+                variant="static"
+              />
+            ))
+          ) : (
+            Array.from({ length: 3 }).flatMap((_, repeatIdx) =>
+              cat.subcatProducts.map((sp) => (
+                <SubcategoryCard
+                  key={`${sp.subcat}-${repeatIdx}`}
+                  catName={cat.name}
+                  subcatName={sp.subcat}
+                  image={sp.products[0]?.image || ""}
+                />
+              ))
+            )
+          )}
         </div>
-
-        {/* Right Arrow */}
-        {canScrollRight && (
-          <button
-            onClick={() => scroll(1)}
-            aria-label="Scroll right"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 border border-line rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-white hover:shadow-lg transition-all duration-200 -mr-5"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        )}
       </div>
     </div>
   );

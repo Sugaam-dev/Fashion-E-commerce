@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Plus, Minus } from "lucide-react";
 import { useCart } from "../../context/CartContext.jsx";
@@ -13,8 +13,17 @@ export default function ProductDetailsPage() {
   const product = PRODUCTS.find((p) => p.id === parseInt(id));
 
   const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || "");
-  const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || "");
+  const [selectedSize, setSelectedSize] = useState(product?.defaultSize || "");
+  const [selectedImage, setSelectedImage] = useState(product?.image || "");
   const [qty, setQty] = useState(1);
+
+  useEffect(() => {
+    if (product) {
+      setSelectedImage(product.image);
+      setSelectedColor(product.colors?.[0] || "");
+      setSelectedSize(product.defaultSize || "");
+    }
+  }, [product]);
 
   if (!product) {
     return (
@@ -29,7 +38,11 @@ export default function ProductDetailsPage() {
 
   function handleAddToBag() {
     const options = [];
-    if (product.sizes && product.sizes.length > 0 && selectedSize) {
+    if (product.sizes && product.sizes.length > 0) {
+      if (!selectedSize) {
+        alert("Please select a size option before adding to bag.");
+        return;
+      }
       options.push(selectedSize);
     }
 
@@ -61,13 +74,37 @@ export default function ProductDetailsPage() {
 
       {/* Main Details Panel */}
       <main className="max-w-[1280px] mx-auto px-6 md:px-10 pb-16 md:pb-24 grid md:grid-cols-2 gap-10 md:gap-16">
-        {/* Left Column: Product Image */}
-        <div className="aspect-[3/4] bg-cream-2 rounded-sm overflow-hidden shadow-sm">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover"
-          />
+        {/* Left Column: Product Image & Gallery */}
+        <div className="flex flex-col md:flex-row gap-4 h-fit">
+          {/* Thumbnail column/row */}
+          {product.images && product.images.length > 1 && (
+            <div className="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto max-h-[90px] md:max-h-[600px] no-scrollbar w-full md:w-24 shrink-0 pb-2 md:pb-0">
+              {product.images.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedImage(img)}
+                  className={`w-16 h-20 md:w-full md:h-28 rounded-sm overflow-hidden border-2 transition-all cursor-pointer shrink-0 ${
+                    selectedImage === img ? "border-rust shadow-sm" : "border-transparent opacity-70 hover:opacity-100"
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt={`${product.name} View ${idx + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+          
+          {/* Main Display Image */}
+          <div className="order-1 md:order-2 flex-1 aspect-[3/4] bg-cream-2 rounded-sm overflow-hidden shadow-sm">
+            <img
+              src={selectedImage || product.image}
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
 
         {/* Right Column: Info & Details */}
@@ -148,6 +185,39 @@ export default function ProductDetailsPage() {
   </div>
 )}
 
+            {/* Product Details Section */}
+            {product.highlights && Object.keys(product.highlights).length > 0 && (
+              <div className="mt-8 pt-8 border-t border-line mb-8">
+                <h2 className="font-serif text-xl font-semibold text-charcoal mb-5">Product Details</h2>
+                
+                <div className="mb-6">
+                  <h3 className="text-[11px] uppercase tracking-widest text-charcoal/40 font-bold mb-3.5">
+                    Top Highlights
+                  </h3>
+                  <div className="grid grid-cols-1 gap-y-2.5">
+                    {Object.entries(product.highlights).map(([key, value]) => (
+                      <div key={key} className="flex border-b border-line/30 pb-2 text-[13.5px] leading-relaxed">
+                        <span className="w-5/12 font-semibold text-charcoal">{key}</span>
+                        <span className="w-7/12 text-charcoal/60">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {product.aboutThisItem && product.aboutThisItem.length > 0 && (
+                  <div className="mt-8">
+                    <h3 className="text-[11px] uppercase tracking-widest text-charcoal/40 font-bold mb-3.5">
+                      About This Item
+                    </h3>
+                    <ul className="list-disc pl-4 space-y-2 text-[13.5px] text-charcoal/60 leading-relaxed">
+                      {product.aboutThisItem.map((point, index) => (
+                        <li key={index}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Add to cart block */}

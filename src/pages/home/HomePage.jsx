@@ -3,7 +3,6 @@ import CategoryCarousel from "./CategoryCarousel";
 import Hero from "./Hero.jsx";
 import Marquee from "../../components/ui/Marquee.jsx";
 import Categories from "./Categories.jsx";
-import CustomSection from "./CustomSection.jsx";
 import Story from "./Story.jsx";
 // import Newsletter from "./Newsletter.jsx";
 import ProductCard from "../../components/cards/ProductCard.jsx";
@@ -79,7 +78,6 @@ export default function HomePage() {
          </div>
        </section>
 
-      <CustomSection />
       <Story />
 
       {/* Testimonials Section (PMRG Divas Reviews) */}

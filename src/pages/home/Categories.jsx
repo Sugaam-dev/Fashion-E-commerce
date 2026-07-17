@@ -1,22 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import sareesCatImg from "../../assets/images/categories/main/sarees_category_image.jpg";
+import dressMaterialCatImg from "../../assets/images/categories/main/dress_material_category_image.jpg";
+import readymadeCatImg from "../../assets/images/categories/main/readymade_category_image.jpg";
+import accessoriesCatImg from "../../assets/images/categories/main/accessories_category_image.jpg";
 
 const CATEGORIES = [
   {
     name: "Sarees",
-    // Use first saree image as representative
-    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80",
+    image: sareesCatImg,
   },
   {
     name: "Dress Material",
-    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+    image: dressMaterialCatImg,
   },
   {
     name: "Readymade",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
+    image: readymadeCatImg,
   },
   {
     name: "Accessories",
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80",
+    image: accessoriesCatImg,
   },
 ];
 
