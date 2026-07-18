@@ -91,3 +91,20 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Swiper custom overrides */
+.swiper {
+  padding-bottom: 28px !important;
+}
+.swiper-pagination-bullet {
+  background-color: var(--color-line) !important;
+  opacity: 1 !important;
+  width: 6px !important;
+  height: 6px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: var(--color-rust) !important;
+  width: 24px !important;
+  border-radius: 3px !important;
+}

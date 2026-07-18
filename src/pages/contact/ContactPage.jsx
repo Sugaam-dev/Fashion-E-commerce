@@ -14,7 +14,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-cream min-h-screen py-16 md:py-24">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+      <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10">
         
         {/* Header Title */}
         <div className="text-center max-w-xl mx-auto mb-16 md:mb-24">
@@ -46,7 +46,7 @@ export default function ContactPage() {
                 <div>
                   <h4 className="font-serif text-base font-bold text-charcoal">WhatsApp Direct</h4>
                   <a
-                    href="https://wa.me/919820001138?text=Hello%20Shrikamalini,%20I%20would%20like%20to%20schedule%20a%20made-to-measure%20stylist%20consultation."
+                    href="https://wa.me/9820001138?text=Hello%20Shrikamalini,%20I%20would%20like%20to%20schedule%20a%20made-to-measure%20stylist%20consultation."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-rust font-semibold hover:underline"

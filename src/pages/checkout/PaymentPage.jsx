@@ -1,30 +1,109 @@
 import { useState } from "react";
-import { Landmark, Copy, Upload, ArrowLeft } from "lucide-react";
+import { Landmark, Copy, Upload, ArrowLeft, ShoppingBag } from "lucide-react";
 import { useCart } from "../../context/CartContext.jsx";
 
 export default function PaymentPage({ onComplete }) {
   const { cart, clearCart, showToast } = useCart();
-  const [form, setForm] = useState({ name: "", phone: "", utr: "", file: null });
+  const [form, setForm] = useState({ name: "", phone: "", address: "", utr: "", file: null });
 
   const totalAmount = cart.reduce((s, item) => s + item.price * item.qty, 0);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!form.utr.trim()) {
-      alert("Please enter a valid Transaction ID / UTR number.");
-      return;
+  function validateForm(isPrepaid) {
+    const name = form.name.trim();
+    if (!name) {
+      alert("Please enter your Full Name.");
+      return false;
     }
+    if (name.length < 2) {
+      alert("Full Name must be at least 2 characters long.");
+      return false;
+    }
+
+    const phone = form.phone.trim().replace(/\D/g, "");
+    if (!phone) {
+      alert("Please enter your Phone Number.");
+      return false;
+    }
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.");
+      return false;
+    }
+
+    const address = form.address.trim();
+    if (!address) {
+      alert("Please enter your Delivery Address.");
+      return false;
+    }
+    if (address.length < 10) {
+      alert("Please enter a complete delivery address with landmark and PIN code (at least 10 characters).");
+      return false;
+    }
+
+    if (isPrepaid) {
+      const utr = form.utr.trim();
+      if (!utr) {
+        alert("Please enter a Transaction ID / UTR number for Prepaid verification.");
+        return false;
+      }
+      const utrRegex = /^[a-zA-Z0-9]{6,18}$/;
+      if (!utrRegex.test(utr)) {
+        alert("Please enter a valid Transaction ID / UTR (6 to 18 alphanumeric characters).");
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  function handlePrepaidOrder(e) {
+    e.preventDefault();
+    if (!validateForm(true)) return;
+    sendWhatsAppOrder("Prepaid (Transfer Verification Submitted)", form.utr);
+  }
+
+  function handleCODOrder(e) {
+    e.preventDefault();
+    if (!validateForm(false)) return;
+    sendWhatsAppOrder("COD / Pay Later on WhatsApp");
+  }
+
+  function sendWhatsAppOrder(paymentStatus, utrNumber = "") {
+    const itemsText = cart
+      .map((item) => `- ${item.name} x ${item.qty} — ₹${(item.price * item.qty).toLocaleString("en-IN")}`)
+      .join("\n");
+
+    const message = `🌸 *SHRIKAMALINI STUDIO - NEW ORDER* 🌸
+-----------------------------------------
+👤 *Customer Name:* ${form.name.trim()}
+📞 *Phone Number:* ${form.phone.trim()}
+📍 *Delivery Address:* ${form.address.trim()}
+
+🛍️ *Order Details:*
+${itemsText}
+-----------------------------------------
+💰 *Subtotal:* ₹${totalAmount.toLocaleString("en-IN")}
+🚚 *Shipping:* Free Shipping
+💵 *Grand Total:* ₹${totalAmount.toLocaleString("en-IN")}
+
+💳 *Payment Information:*
+Status: *${paymentStatus}*${utrNumber ? `\nUTR/Transaction ID: \`${utrNumber.trim()}\`` : ""}
+-----------------------------------------
+Thank you for shopping with Shrikamalini!`;
+
+    const encodedText = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/9820001138?text=${encodedText}`;
     
-    // Success flow
-    showToast(`Order Placed! Payment UTR: ${form.utr} is sent for verification.`);
-    clearCart();
+    showToast("Redirecting to WhatsApp to complete order...");
+    window.open(whatsappUrl, "_blank");
+    clearCart(); // Clear the cart when order is successfully completed!
     onComplete(); // Go back home
   }
 
   if (cart.length === 0) {
     return (
       <div className="bg-cream min-h-screen py-16 md:py-24 text-center">
-        <div className="max-w-[1280px] mx-auto px-6">
+        <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6">
           <ShoppingBag size={48} className="mx-auto text-charcoal/20 mb-4 stroke-[1.2]" />
           <h2 className="font-serif text-2xl font-bold mb-4">Your bag is empty</h2>
           <p className="text-sm text-charcoal/60 mb-6">Please add items to your cart before proceeding to payment.</p>
@@ -42,7 +121,7 @@ export default function PaymentPage({ onComplete }) {
 
   return (
     <div className="bg-cream min-h-screen py-16 md:py-24">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+      <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10">
         
         {/* Header Title */}
         <div className="text-center max-w-xl mx-auto mb-16">
@@ -166,20 +245,20 @@ export default function PaymentPage({ onComplete }) {
 
           {/* Right Column: Transaction Submission Form */}
           <div className="bg-white p-8 border border-line rounded-sm shadow-sm">
-            <h3 className="font-serif text-xl font-bold mb-2 text-charcoal">Payment Verification</h3>
+            <h3 className="font-serif text-xl font-bold mb-2 text-charcoal">Checkout & Verification</h3>
             <p className="text-xs text-charcoal/50 mb-6">
-              Enter your transfer details below. We verify deposits within 10-15 minutes.
+              Please enter your shipping address and submit your order details via WhatsApp.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handlePrepaidOrder} className="space-y-5">
               <div>
-                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Payer Name</label>
+                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Full Name</label>
                 <input
                   type="text"
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Enter sender's name"
+                  placeholder="Enter recipient's name"
                   className="w-full px-4 py-3 border border-line bg-cream text-sm outline-none focus:border-rust"
                 />
               </div>
@@ -197,13 +276,25 @@ export default function PaymentPage({ onComplete }) {
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Transaction ID / UTR Number</label>
+                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Delivery Address</label>
+                <textarea
+                  required
+                  rows="3"
+                  value={form.address}
+                  onChange={(e) => setForm({ ...form, address: e.target.value })}
+                  placeholder="Enter full shipping address with state and PIN code"
+                  className="w-full px-4 py-3 border border-line bg-cream text-sm outline-none focus:border-rust resize-none"
+                />
+              </div>
+
+              <div className="pt-2 border-t border-line/60">
+                <span className="block text-[11px] uppercase tracking-wider text-charcoal/40 font-bold mb-3">Prepaid Verification (UPI/Bank)</span>
+                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">UTR / Transaction ID</label>
                 <input
                   type="text"
-                  required
                   value={form.utr}
                   onChange={(e) => setForm({ ...form, utr: e.target.value })}
-                  placeholder="12-digit UPI / Bank UTR ID"
+                  placeholder="12-digit transaction ID (if paid online)"
                   className="w-full px-4 py-3 border border-line bg-cream text-sm outline-none focus:border-rust tracking-wider"
                 />
               </div>
@@ -222,14 +313,37 @@ export default function PaymentPage({ onComplete }) {
                   />
                   <span className="block text-[10px] text-charcoal/40">PNG, JPG up to 5MB</span>
                 </div>
+                
+                {/* Note about manual WhatsApp attachment */}
+                <div className="mt-3 p-3 bg-rust/5 border border-rust/10 rounded-sm text-[11.5px] leading-relaxed text-rust-deep flex items-start gap-2 animate-fadeIn">
+                  <span className="shrink-0 text-xs">💡</span>
+                  <p>
+                    <strong>Note:</strong> Since WhatsApp does not allow files to be attached automatically through links, please <strong>manually attach/paste</strong> your payment receipt screenshot inside the WhatsApp chat after it opens.
+                  </p>
+                </div>
               </div>
 
-              <button
-                type="submit"
-                className="w-full py-4 bg-rust hover:bg-rust-deep text-white text-[12.5px] tracking-widest uppercase font-semibold shadow-md transition-colors cursor-pointer"
-              >
-                Submit Payment Receipt
-              </button>
+              <div className="space-y-3 pt-4">
+                <button
+                  type="submit"
+                  className="w-full py-4 bg-rust hover:bg-rust-deep text-white text-[12.5px] tracking-widest uppercase font-semibold shadow-md transition-colors cursor-pointer"
+                >
+                  Confirm Prepaid Order via WhatsApp
+                </button>
+
+                <div className="relative flex items-center justify-center py-1">
+                  <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-line"></div></div>
+                  <span className="relative px-3 bg-white text-[10px] text-charcoal/40 uppercase font-semibold tracking-wider">or</span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleCODOrder}
+                  className="w-full py-4 bg-charcoal hover:bg-charcoal/90 text-cream text-[12.5px] tracking-widest uppercase font-semibold shadow-md transition-colors cursor-pointer"
+                >
+                  Order via WhatsApp (COD / Pay Later)
+                </button>
+              </div>
             </form>
           </div>
 

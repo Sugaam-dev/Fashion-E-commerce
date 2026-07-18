@@ -55,7 +55,7 @@ export default function HomePage() {
 
        {/* Featured Collection grouped by subcategory */}
        <section className="py-16 md:py-24 bg-cream">
-         <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+         <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10">
            <div className="flex justify-between items-end flex-wrap gap-5 mb-12">
              <div>
                <span className="block text-xs tracking-[0.2em] uppercase text-rust mb-2 font-semibold">
@@ -82,7 +82,7 @@ export default function HomePage() {
 
       {/* Testimonials Section (PMRG Divas Reviews) */}
       <section className="py-16 md:py-24 bg-cream border-t border-line">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+        <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10">
           <div className="text-center max-w-xl mx-auto mb-16">
             <span className="text-xs tracking-[0.22em] uppercase text-rust font-semibold block mb-3">
               #ShrikamaliniDivas Speaks

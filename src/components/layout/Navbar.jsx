@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react";
 import { useCart } from "../../context/CartContext.jsx";
 
 export default function Navbar() {
-  const { cart, setDrawerOpen, showToast } = useCart();
+  const { cart, wishlist, setDrawerOpen, setWishlistOpen, showToast } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchVal, setSearchVal] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
   const count = cart.reduce((s, i) => s + i.qty, 0);
 
   let Flashsale = false ;
@@ -25,6 +28,16 @@ export default function Navbar() {
     setMobileOpen(false);
   }
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchVal.trim()) {
+      navigate(`/product?search=${encodeURIComponent(searchVal.trim())}`);
+      setSearchVal("");
+      setSearchOpen(false);
+      setMobileOpen(false);
+    }
+  };
+
   return (
     <>
     {Flashsale &&
@@ -34,7 +47,7 @@ export default function Navbar() {
 }
 
       <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-line">
-        <nav className="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-10 py-1.5">
+        <nav className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto flex items-center justify-between px-6 md:px-10 py-1.5">
           <Link 
             to="/" 
             className="flex items-center hover:opacity-90"
@@ -73,24 +86,57 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-5.5 text-charcoal">
-            <button
-              title="Search"
-              className="hover:text-rust transition-colors cursor-pointer"
-              onClick={() => showToast("Search workspace activated! (Mock)")}
-            >
-              <Search size={18} className="stroke-[1.85]" />
-            </button>
+            {searchOpen ? (
+              <form onSubmit={handleSearchSubmit} className="flex items-center gap-1.5 border border-line bg-white px-2 py-1 rounded-sm animate-fadeIn">
+                <input
+                  type="text"
+                  value={searchVal}
+                  onChange={(e) => setSearchVal(e.target.value)}
+                  placeholder="Search products..."
+                  className="w-28 sm:w-40 text-xs outline-none bg-transparent"
+                  autoFocus
+                />
+                <button type="submit" className="hover:text-rust cursor-pointer">
+                  <Search size={14} className="stroke-[2]" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchOpen(false);
+                    setSearchVal("");
+                  }}
+                  className="hover:text-rust cursor-pointer"
+                >
+                  <X size={14} className="stroke-[2]" />
+                </button>
+              </form>
+            ) : (
+              <button
+                title="Search"
+                className="hover:text-rust transition-colors cursor-pointer"
+                onClick={() => setSearchOpen(true)}
+              >
+                <Search size={18} className="stroke-[1.85]" />
+              </button>
+            )}
+
             <button
               title="Wishlist"
-              className="hover:text-rust transition-colors cursor-pointer"
-              onClick={() => showToast("Wishlist view activated! (Mock)")}
+              className="relative hover:text-rust transition-colors cursor-pointer flex items-center"
+              onClick={() => setWishlistOpen(true)}
             >
               <Heart size={18} className="stroke-[1.85]" />
+              {wishlist.size > 0 && (
+                <span className="absolute -top-1.5 -right-2 bg-rust text-white text-[9.5px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {wishlist.size}
+                </span>
+              )}
             </button>
+
             <button
               title="Bag"
               onClick={() => setDrawerOpen(true)}
-              className="relative hover:text-rust transition-colors cursor-pointer"
+              className="relative hover:text-rust transition-colors cursor-pointer flex items-center"
             >
               <ShoppingBag size={18} className="stroke-[1.85]" />
               <span className="absolute -top-1.5 -right-2 bg-rust text-white text-[9.5px] font-bold w-4 h-4 rounded-full flex items-center justify-center">

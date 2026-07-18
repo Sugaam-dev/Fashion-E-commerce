@@ -32,7 +32,7 @@ export default function Categories() {
 
   return (
     <section className="py-16 md:py-24 bg-cream-2/40">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10 space-y-12">
+      <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10 space-y-12">
         <div>
           <span className="block text-xs tracking-[0.2em] uppercase text-rust-deep mb-2 font-medium">
             Shop by category

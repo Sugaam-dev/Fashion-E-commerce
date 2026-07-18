@@ -15,7 +15,9 @@ export default function Shop() {
     () => searchParams.get("subcat") || "All"
   );
   const [sort, setSort] = useState("featured");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(
+    () => searchParams.get("search") || ""
+  );
   const [selectedSeason, setSelectedSeason] = useState("All");
   const [priceFilter, setPriceFilter] = useState("All");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -24,12 +26,13 @@ export default function Shop() {
   useEffect(() => {
     const cat = searchParams.get("category") || "All";
     const sub = searchParams.get("subcat") || "All";
+    const q = searchParams.get("search") || "";
     setSelectedCategory(cat);
     setSelectedSubcat(sub);
+    setSearchQuery(q);
     // Reset sidebar-only filters when collection changes via URL
     setSelectedSeason("All");
     setPriceFilter("All");
-    setSearchQuery("");
     setSort("featured");
   }, [searchParams]);
 
@@ -105,7 +108,6 @@ export default function Shop() {
   function handleCategoryChange(val) {
     setSelectedCategory(val);
     setSelectedSubcat("All"); // reset subcat whenever main category changes
-    setSearchQuery("");
   }
 
   function handleResetFilters() {
@@ -266,7 +268,7 @@ export default function Shop() {
 
   return (
     <section id="shop" className="py-16 md:py-24">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+      <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10">
 
         {/* Page Header */}
         <div className="mb-14">
@@ -296,7 +298,7 @@ export default function Shop() {
 
           {/* Sticky sidebar (desktop only) */}
           <aside className="hidden lg:block w-[250px] sticky top-28 self-start bg-cream-2/20 p-6 border border-line rounded-sm shadow-xs">
-            <FilterContent />
+            {FilterContent()}
           </aside>
 
           {/* Product grid */}
@@ -370,7 +372,7 @@ export default function Shop() {
                   <X size={20} className="stroke-[1.8]" />
                 </button>
               </div>
-              <FilterContent />
+              {FilterContent()}
             </div>
           </aside>
         </>

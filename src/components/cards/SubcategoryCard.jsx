@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 
-export default function SubcategoryCard({ catName, subcatName, image, variant = "carousel" }) {
-  const widthCls =
-    variant === "static"
-      ? "w-[calc(75vw-32px)] sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-11px)]"
-      : "w-full sm:w-[calc(50%-8px)] lg:w-[calc(25%-12px)]";
+export default function SubcategoryCard({ catName, subcatName, image }) {
   return (
-    <div className={`group flex-none ${widthCls}`}>
+    <div className="group w-full">
       <Link
         to={`/product?category=${encodeURIComponent(catName)}&subcat=${encodeURIComponent(subcatName)}`}
         className="relative block aspect-[3/4] overflow-hidden rounded-sm shadow-sm"

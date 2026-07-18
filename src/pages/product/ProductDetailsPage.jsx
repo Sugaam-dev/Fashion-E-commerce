@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Plus, Minus } from "lucide-react";
+import { ArrowLeft, Plus, Minus, Heart } from "lucide-react";
 import { useCart } from "../../context/CartContext.jsx";
 import { PRODUCTS } from "../../data/products/products.js";
 import ProductCard from "../../components/cards/ProductCard.jsx";
@@ -8,9 +8,10 @@ import ProductCard from "../../components/cards/ProductCard.jsx";
 export default function ProductDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const { addToCart, toggleWish, wishlist } = useCart();
   
   const product = PRODUCTS.find((p) => p.id === parseInt(id));
+  const isWished = product ? wishlist.has(product.id) : false;
 
   const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || "");
   const [selectedSize, setSelectedSize] = useState(product?.defaultSize || "");
@@ -62,7 +63,7 @@ export default function ProductDetailsPage() {
   return (
     <div className="bg-cream min-h-screen">
       {/* Back button link */}
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-6">
+      <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10 py-6">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-[13px] tracking-widest uppercase font-semibold text-charcoal/60 hover:text-rust transition-colors cursor-pointer"
@@ -73,7 +74,7 @@ export default function ProductDetailsPage() {
       </div>
 
       {/* Main Details Panel */}
-      <main className="max-w-[1280px] mx-auto px-6 md:px-10 pb-16 md:pb-24 grid md:grid-cols-2 gap-10 md:gap-16">
+      <main className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10 pb-16 md:pb-24 grid md:grid-cols-2 gap-10 md:gap-16">
         {/* Left Column: Product Image & Gallery */}
         <div className="flex flex-col md:flex-row gap-4 h-fit">
           {/* Thumbnail column/row */}
@@ -98,11 +99,11 @@ export default function ProductDetailsPage() {
           )}
           
           {/* Main Display Image */}
-          <div className="order-1 md:order-2 flex-1 aspect-[3/4] bg-cream-2 rounded-sm overflow-hidden shadow-sm">
+          <div className="order-1 md:order-2 flex-1 flex items-center justify-center w-full">
             <img
               src={selectedImage || product.image}
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="max-h-[450px] md:max-h-[550px] w-auto h-auto object-contain rounded-sm shadow-sm border border-line transition-all duration-300"
             />
           </div>
         </div>
@@ -242,9 +243,17 @@ export default function ProductDetailsPage() {
 
             <button
               onClick={handleAddToBag}
-              className="flex-1 h-12 bg-rust hover:bg-rust-deep text-white text-[12.5px] tracking-[0.18em] uppercase font-bold transition-all duration-300 shadow-md cursor-pointer"
+              className="flex-grow h-12 bg-rust hover:bg-rust-deep text-white text-[12.5px] tracking-[0.18em] uppercase font-bold transition-all duration-300 shadow-md cursor-pointer"
             >
               Add To Bag
+            </button>
+
+            <button
+              onClick={() => toggleWish(product.id)}
+              className="h-12 w-12 border border-line bg-white hover:bg-cream-2/30 flex items-center justify-center cursor-pointer transition-colors shadow-xs"
+              title={isWished ? "Remove from Favorites" : "Add to Favorites"}
+            >
+              <Heart size={20} className={isWished ? "fill-rust text-rust stroke-[2.2]" : "text-charcoal stroke-[1.8]"} />
             </button>
           </div>
         </div>
@@ -252,7 +261,7 @@ export default function ProductDetailsPage() {
 
       {/* Description / Story blocks */}
       <section className="bg-cream-2/40 border-t border-b border-line py-16">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10 grid md:grid-cols-3 gap-8">
+        <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10 grid md:grid-cols-3 gap-8">
           <div>
             <h4 className="font-serif text-[18px] font-semibold mb-3">Artisan Craftsmanship</h4>
             <p className="text-[13.5px] leading-relaxed text-charcoal/60">
@@ -279,7 +288,7 @@ export default function ProductDetailsPage() {
 
       {/* Related items */}
       {relatedProducts.length > 0 && (
-        <section className="py-16 md:py-24 max-w-[1280px] mx-auto px-6 md:px-10">
+        <section className="py-16 md:py-24 max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10">
           <h3 className="font-serif text-2xl font-semibold mb-10 text-center">You May Also Like</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {relatedProducts.map((p) => (

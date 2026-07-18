@@ -1,12 +1,41 @@
-import { createContext, useContext, useState, useCallback } from "react";
+import { createContext, useContext, useState, useCallback, useEffect } from "react";
 
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState(new Set());
+  // Initialize cart from localStorage
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = localStorage.getItem("cart");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Initialize wishlist from localStorage
+  const [wishlist, setWishlist] = useState(() => {
+    try {
+      const saved = localStorage.getItem("wishlist");
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
+
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
   const [toast, setToast] = useState({ show: false, msg: "" });
+
+  // Sync cart to localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // Sync wishlist to localStorage
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(Array.from(wishlist)));
+  }, [wishlist]);
 
   const showToast = useCallback((msg) => {
     setToast({ show: true, msg });
@@ -37,6 +66,10 @@ export function CartProvider({ children }) {
     setCart((prev) => prev.filter((i) => i.id !== id));
   }, []);
 
+  const clearCart = useCallback(() => {
+    setCart([]);
+  }, []);
+
   const toggleWish = useCallback((id) => {
     setWishlist((prev) => {
       const next = new Set(prev);
@@ -51,9 +84,10 @@ export function CartProvider({ children }) {
   }, [showToast]);
 
   const value = {
-    cart, addToCart, changeQty, removeItem,
+    cart, addToCart, changeQty, removeItem, clearCart,
     wishlist, toggleWish,
     drawerOpen, setDrawerOpen,
+    wishlistOpen, setWishlistOpen,
     toast, showToast,
   };
 

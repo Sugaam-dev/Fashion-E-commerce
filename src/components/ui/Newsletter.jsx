@@ -11,7 +11,7 @@ export default function Newsletter() {
 
   return (
     <section className="bg-charcoal text-cream text-center py-16 md:py-24">
-      <div className="max-w-[1280px] mx-auto px-6">
+      <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6">
         <span className="block text-xs tracking-[0.22em] uppercase text-mustard mb-5">
           Stay in the loop
         </span>

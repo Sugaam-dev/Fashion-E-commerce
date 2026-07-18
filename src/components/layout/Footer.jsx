@@ -4,7 +4,7 @@ import { CiYoutube } from "react-icons/ci";
 export default function Footer() {
   return (
     <footer className="pt-16 md:pt-20 pb-8 border-t border-line">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+      <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10">
         <div className="grid sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 md:gap-12 mb-14">
           <div>
             <div className="font-serif text-2xl font-semibold mb-3">
