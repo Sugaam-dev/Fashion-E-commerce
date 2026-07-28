@@ -20,6 +20,7 @@ export default function Shop() {
   );
   const [selectedSeason, setSelectedSeason] = useState("All");
   const [priceFilter, setPriceFilter] = useState("All");
+  const [stockFilter, setStockFilter] = useState("All");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   // Sync filter state when URL params change (e.g. navigating between Collection chips)
@@ -33,11 +34,12 @@ export default function Shop() {
     // Reset sidebar-only filters when collection changes via URL
     setSelectedSeason("All");
     setPriceFilter("All");
+    setStockFilter("All");
     setSort("featured");
   }, [searchParams]);
 
   // Core categories for navigation and sidebar filtering
-  const mainCategories = ["All", "Sarees", "Dress Material", "Readymade", "Accessories", "Jewellery"];
+  const mainCategories = ["All", "Sarees", "Dress Material", "Readymade", "Accessories"];
 
   // Subcategories available for the selected main category (from COLLECTION_CATEGORIES structure)
   const availableSubcats = useMemo(() => {
@@ -78,7 +80,11 @@ export default function Shop() {
     if (priceFilter === "2k5k")   list = list.filter((p) => p.price >= 2000 && p.price <= 5000);
     if (priceFilter === "over5k") list = list.filter((p) => p.price > 5000);
 
-    // 5. Search filter
+    // 5. Stock filter
+    if (stockFilter === "inStock") list = list.filter((p) => !p.isSoldOut);
+    if (stockFilter === "soldOut") list = list.filter((p) => p.isSoldOut);
+
+    // 6. Search filter
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       list = list.filter(
@@ -89,12 +95,12 @@ export default function Shop() {
       );
     }
 
-    // 6. Sort
+    // 7. Sort
     if (sort === "low")  list.sort((a, b) => a.price - b.price);
     if (sort === "high") list.sort((a, b) => b.price - a.price);
 
     return list;
-  }, [selectedCategory, selectedSubcat, selectedSeason, priceFilter, searchQuery, sort]);
+  }, [selectedCategory, selectedSubcat, selectedSeason, priceFilter, stockFilter, searchQuery, sort]);
 
   // True when the listing is empty due to a specific subcat having no products yet
   // (as opposed to user-applied secondary filters returning no results)
@@ -115,6 +121,7 @@ export default function Shop() {
     setSelectedSubcat("All");
     setSelectedSeason("All");
     setPriceFilter("All");
+    setStockFilter("All");
     setSearchQuery("");
     setSort("featured");
   }
@@ -236,6 +243,22 @@ export default function Shop() {
             <option value="under2k">Under ₹2,000</option>
             <option value="2k5k">₹2,000 – ₹5,000</option>
             <option value="over5k">Over ₹5,000</option>
+          </select>
+        </div>
+
+        {/* Availability */}
+        <div>
+          <h4 className="text-[11px] uppercase tracking-[0.18em] text-charcoal/40 font-bold mb-3">
+            Stock Availability
+          </h4>
+          <select
+            value={stockFilter}
+            onChange={(e) => setStockFilter(e.target.value)}
+            className="w-full border border-line bg-white text-xs px-3 py-2.5 outline-none cursor-pointer hover:border-rust transition-colors font-medium"
+          >
+            <option value="All font-semibold">All Items (In Stock & Sold Out)</option>
+            <option value="inStock">In Stock Only (Folder Images)</option>
+            <option value="soldOut">Sold Out Only</option>
           </select>
         </div>
 

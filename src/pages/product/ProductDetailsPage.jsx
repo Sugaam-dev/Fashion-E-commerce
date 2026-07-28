@@ -38,6 +38,10 @@ export default function ProductDetailsPage() {
   const relatedProducts = PRODUCTS.filter((p) => p.cat === product.cat && p.id !== product.id).slice(0, 4);
 
   function handleAddToBag() {
+    if (product.isSoldOut) {
+      alert("Sorry, this item is currently sold out.");
+      return;
+    }
     const options = [];
     if (product.sizes && product.sizes.length > 0) {
       if (!selectedSize) {
@@ -111,9 +115,20 @@ export default function ProductDetailsPage() {
         {/* Right Column: Info & Details */}
         <div className="flex flex-col justify-between">
           <div>
-            <span className="block text-[11px] text-rust uppercase tracking-[0.2em] font-semibold mb-2">
-               {product.cat}{product.subcat ? ` · ${product.subcat}` : ''} · {product.season}
-            </span>
+            <div className="flex items-center gap-3 mb-2">
+              <span className="block text-[11px] text-rust uppercase tracking-[0.2em] font-semibold">
+                 {product.cat}{product.subcat ? ` · ${product.subcat}` : ''} · {product.season}
+              </span>
+              {product.isSoldOut ? (
+                <span className="text-[10px] uppercase font-bold tracking-widest text-white bg-rust-deep px-2.5 py-0.5 rounded-xs">
+                  Sold Out
+                </span>
+              ) : (
+                <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-xs border border-emerald-200">
+                  In Stock
+                </span>
+              )}
+            </div>
             <h1 className="font-serif text-3xl md:text-5xl font-semibold mb-4 leading-tight text-charcoal">
               {product.name}
             </h1>
@@ -223,9 +238,10 @@ export default function ProductDetailsPage() {
 
           {/* Add to cart block */}
           <div className="flex gap-4 items-center pt-2">
-            <div className="flex items-center border border-line bg-white h-12">
+            <div className={`flex items-center border border-line bg-white h-12 ${product.isSoldOut ? "opacity-40 pointer-events-none" : ""}`}>
               <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
+                disabled={product.isSoldOut}
                 className="w-10 h-full flex items-center justify-center cursor-pointer hover:bg-cream-2/30 transition-colors"
                 title="Decrease quantity"
               >
@@ -234,6 +250,7 @@ export default function ProductDetailsPage() {
               <span className="w-10 text-center text-sm font-semibold">{qty}</span>
               <button
                 onClick={() => setQty((q) => q + 1)}
+                disabled={product.isSoldOut}
                 className="w-10 h-full flex items-center justify-center cursor-pointer hover:bg-cream-2/30 transition-colors"
                 title="Increase quantity"
               >
@@ -243,9 +260,14 @@ export default function ProductDetailsPage() {
 
             <button
               onClick={handleAddToBag}
-              className="flex-grow h-12 bg-rust hover:bg-rust-deep text-white text-[12.5px] tracking-[0.18em] uppercase font-bold transition-all duration-300 shadow-md cursor-pointer"
+              disabled={product.isSoldOut}
+              className={`flex-grow h-12 text-[12.5px] tracking-[0.18em] uppercase font-bold transition-all duration-300 shadow-md ${
+                product.isSoldOut
+                  ? "bg-charcoal/30 text-white/70 cursor-not-allowed shadow-none"
+                  : "bg-rust hover:bg-rust-deep text-white cursor-pointer"
+              }`}
             >
-              Add To Bag
+              {product.isSoldOut ? "Sold Out" : "Add To Bag"}
             </button>
 
             <button

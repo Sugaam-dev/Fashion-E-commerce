@@ -43,15 +43,19 @@ export default function CategoryCarousel({ cat }) {
         }}
         className="w-full"
       >
-        {subcats.map((sp) => (
-          <SwiperSlide key={sp.subcat}>
-            <SubcategoryCard
-              catName={cat.name}
-              subcatName={sp.subcat}
-              image={sp.products[0]?.image || ""}
-            />
-          </SwiperSlide>
-        ))}
+        {subcats.map((sp) => {
+          const isAllSoldOut = sp.products.length > 0 && sp.products.every((p) => p.isSoldOut);
+          return (
+            <SwiperSlide key={sp.subcat}>
+              <SubcategoryCard
+                catName={cat.name}
+                subcatName={sp.subcat}
+                image={sp.products[0]?.image || ""}
+                isSoldOut={isAllSoldOut}
+              />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );
