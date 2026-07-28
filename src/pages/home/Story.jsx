@@ -52,7 +52,7 @@ export default function Story() {
           className="space-y-6"
         >
           <span className="inline-block text-[11px] tracking-[0.25em] uppercase text-rust font-semibold">
-            Why Shrikamalini
+            Why Shreekamalinee
           </span>
           <h2 className="font-serif font-medium text-[28px] md:text-[42px] leading-tight text-charcoal">
             Every piece begins with a fabric story, not a fast trend.

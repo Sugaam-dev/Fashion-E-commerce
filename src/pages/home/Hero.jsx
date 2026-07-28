@@ -6,7 +6,7 @@ export default function Hero() {
   const slides = [
     {
       image: "https://img.magnific.com/premium-photo/world-saree-day-copy-space-background_548646-56572.jpg?semt=ais_hybrid&w=740&q=80",
-      title: "Shrikamalini Silk Sarees",
+      title: "Shreekamalinee Silk Sarees",
       subtitle: "Exquisite slub silk and traditional drapes crafted for modern elegance.",
       cta: "Shop Sarees",
       link: "/product?category=Sarees"

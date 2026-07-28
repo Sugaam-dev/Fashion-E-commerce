@@ -15,7 +15,7 @@ export default function HomePage() {
   const reviews = [
     {
       name: "Ananya Sharma",
-      quote: "The slub silk saree is drop-dead gorgeous. The custom tailoring fit perfectly. Shrikamalini has a client for life!",
+      quote: "The slub silk saree is drop-dead gorgeous. The custom tailoring fit perfectly. Shreekamalinee has a client for life!",
       avatar: "https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&w=150&h=150&q=80",
       item: "Meera Slub Silk Saree"
     },
@@ -85,7 +85,7 @@ export default function HomePage() {
         <div className="max-w-[1280px] min-[2000px]:max-w-[2100px] mx-auto px-6 md:px-10">
           <div className="text-center max-w-xl mx-auto mb-16">
             <span className="text-xs tracking-[0.22em] uppercase text-rust font-semibold block mb-3">
-              #ShrikamaliniDivas Speaks
+              #ShreekamalineeDivas Speaks
             </span>
             <h2 className="font-serif font-medium text-3xl md:text-5xl text-charcoal">
               Loved by Elegant Women

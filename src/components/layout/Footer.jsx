@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 md:gap-12 mb-14">
           <div>
             <div className="font-serif text-2xl font-semibold mb-3">
-              Shrikamalini
+              Shreekamalinee
             </div>
             <p className="text-sm text-charcoal/55 leading-relaxed max-w-xs">
               Contemporary ethnic wear, jewellery and custom women accessories, 
@@ -33,7 +33,7 @@ export default function Footer() {
 
         <div className="flex justify-between items-center flex-wrap gap-4 text-[12.5px] text-charcoal/40 pt-6 border-t border-line">
           <span>
-            © 2026 Shrikamalini. Powered by{" "}
+            © 2026 Shreekamalinee. Powered by{" "}
             <a
               href="https://www.pmrgsolution.com/"
               target="_blank"

@@ -93,7 +93,7 @@ export default function AboutPage() {
               Every thread carries the whisper of an artisan weaver.
             </h2>
             <p className="text-[15px] leading-relaxed text-charcoal/70">
-              Shrikamalini was founded with a single mission: to create contemporary ethnic designs 
+              Shreekamalinee was founded with a single mission: to create contemporary ethnic designs 
               for women while preserving traditional Indian weaving techniques. We partner directly 
               with small-batch weavers across the country, selecting pure slub silks, raw cottons, 
               and organic linens.
@@ -114,7 +114,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="font-serif text-3xl md:text-4xl font-semibold text-center text-charcoal mb-16"
           >
-            The Pillars of Shrikamalini
+            The Pillars of Shreekamalinee
           </motion.h3>
           <div className="grid md:grid-cols-3 gap-8 md:gap-10">
             {pillars.map((pillar, idx) => (
@@ -173,7 +173,7 @@ export default function AboutPage() {
             artisanship alive."
           </p>
           <span className="block text-[11px] uppercase tracking-widest text-rust font-bold">
-            — The Shrikamalini Family
+            — The Shreekamalinee Family
           </span>
         </motion.div>
 

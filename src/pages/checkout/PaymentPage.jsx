@@ -73,7 +73,7 @@ export default function PaymentPage({ onComplete }) {
       .map((item) => `- ${item.name} x ${item.qty} — ₹${(item.price * item.qty).toLocaleString("en-IN")}`)
       .join("\n");
 
-    const message = `🌸 *SHRIKAMALINI STUDIO - NEW ORDER* 🌸
+    const message = `🌸 *Shreekamalinee STUDIO - NEW ORDER* 🌸
 -----------------------------------------
 👤 *Customer Name:* ${form.name.trim()}
 📞 *Phone Number:* ${form.phone.trim()}
@@ -89,7 +89,7 @@ ${itemsText}
 💳 *Payment Information:*
 Status: *${paymentStatus}*${utrNumber ? `\nUTR/Transaction ID: \`${utrNumber.trim()}\`` : ""}
 -----------------------------------------
-Thank you for shopping with Shrikamalini!`;
+Thank you for shopping with Shreekamalinee!`;
 
     const encodedText = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/9820001138?text=${encodedText}`;
@@ -179,7 +179,7 @@ Thank you for shopping with Shrikamalini!`;
                     ))}
                   </div>
                   <span className="absolute text-[10px] tracking-widest bg-rust text-white font-bold px-2 py-0.5 shadow-xs uppercase">
-                    SHRIKAMALINI UPI
+                    Shreekamalinee UPI
                   </span>
                 </div>
 
@@ -187,12 +187,12 @@ Thank you for shopping with Shrikamalini!`;
                   <span className="block text-[11px] uppercase tracking-wider text-charcoal/40 font-medium mb-1.5">UPI ID</span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("shrikamalini@upi");
+                      navigator.clipboard.writeText("Shreekamalinee@upi");
                       showToast("UPI ID Copied to Clipboard!");
                     }}
                     className="w-full py-2 bg-cream hover:bg-cream-2 text-[12.5px] border border-line rounded-sm font-semibold tracking-wide transition-colors cursor-pointer flex items-center justify-center gap-2"
                   >
-                    <span>shrikamalini@upi</span>
+                    <span>Shreekamalinee@upi</span>
                     <Copy size={13} className="stroke-[1.8]" />
                   </button>
                 </div>
@@ -212,7 +212,7 @@ Thank you for shopping with Shrikamalini!`;
                   </div>
                   <div>
                     <span className="block text-[10.5px] uppercase tracking-wider text-charcoal/40 font-medium">Account Name</span>
-                    <strong className="text-[13.5px] text-charcoal font-serif">Shrikamalini Studio</strong>
+                    <strong className="text-[13.5px] text-charcoal font-serif">Shreekamalinee Studio</strong>
                   </div>
                   <div>
                     <span className="block text-[10.5px] uppercase tracking-wider text-charcoal/40 font-medium">Account Number</span>

@@ -58,8 +58,8 @@ export default function Navbar() {
             className="flex items-center hover:opacity-90"
           >
             <img
-              src="/shrikamaliniLogo.png"
-              alt="Shrikamalini Logo"
+              src="/shreekamalineeLogo.png"
+              alt="Shreekamalinee Logo"
               className="h-22 w-auto"
             />
           </Link>
