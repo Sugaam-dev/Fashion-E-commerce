@@ -5,23 +5,34 @@ import { motion, AnimatePresence } from "motion/react";
 export default function Hero() {
   const slides = [
     {
-      image: "https://img.magnific.com/premium-photo/world-saree-day-copy-space-background_548646-56572.jpg?semt=ais_hybrid&w=740&q=80",
-      title: "Shreekamalinee Silk Sarees",
-      subtitle: "Exquisite slub silk and traditional drapes crafted for modern elegance.",
-      cta: "Shop Sarees",
+      categoryTag: "Heritage Saree Collection",
+      image: "https://t4.ftcdn.net/jpg/01/67/25/37/360_F_167253732_FVaF7PyA5vat3JVPvP4F5AsCoZkYAnZF.jpg",
+      title: "Timeless Handloom Sarees",
+      subtitle: "Exquisite Paithani, Maheshwari & Kota Doriya weaves crafted for royal elegance.",
+      cta: "Explore Sarees",
       link: "/product?category=Sarees"
     },
     {
-      image: "https://t4.ftcdn.net/jpg/01/67/25/37/360_F_167253732_FVaF7PyA5vat3JVPvP4F5AsCoZkYAnZF.jpg",
-      title: "Royal Kundan & Temple Gold",
-      subtitle: "Timeless handcrafted jewellery sets that celebrate heritage.",
-      cta: "Shop Jewellery",
-      link: "/product?category=Accessories"
+      categoryTag: "Unstitched Elegance",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM5sbrA3H_wvBXbKNMLeNMMjXiSMkZCk2J0cePvIn7WD2mtTCLykACV6A&s=10",
+      title: "Pure Handcrafted Dress Materials",
+      subtitle: "Tailor your custom fit with authentic Ikat, Jamdani & Kota Doriya cotton suits.",
+      cta: "Shop Dress Material",
+      link: "/product?category=Dress%20Material"
     },
     {
-      image: "https://t4.ftcdn.net/jpg/08/74/88/31/360_F_874883136_weXp7jguYciiVvSuJn0UJfcJ4NLTKcVf.jpg",
-      title: "Luxury Potlis & Accessories",
-      subtitle: "The perfect finishing touch with embroidered potli bags and silk shawls.",
+      categoryTag: "Contemporary Wear",
+      image: "https://thumbs.dreamstime.com/b/fashion-clothes-21701906.jpg",
+      title: "Ready-To-Wear Designer Ensembles",
+      subtitle: "Effortless style and comfort with tailored tops, kurtis with dupatta, and one-piece drapes.",
+      cta: "Shop Readymades",
+      link: "/product?category=Readymade"
+    },
+    {
+      categoryTag: "Ethnic Accents",
+      image: "https://t4.ftcdn.net/jpg/01/10/24/33/360_F_110243334_UHbWD6dt3evUcgr5Jf3aOWxMBuU3Q08k.jpg",
+      title: "Handcrafted Heritage Accessories",
+      subtitle: "Complete your look with luxury sling bags, Paithani clutches, and embroidered pouches.",
       cta: "Shop Accessories",
       link: "/product?category=Accessories"
     }
@@ -85,22 +96,23 @@ export default function Hero() {
             transition={{ duration: 5500, ease: "easeOut" }}
             className="w-full h-full object-cover object-[center_30%]"
           />
-          <div className="absolute inset-0 bg-black/35" />
+          {/* Dark black overlay gradient for high contrast & pop out text */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/45 backdrop-brightness-[0.75]" />
           
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6 z-20">
             <motion.span
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.15, duration: 0.5 }}
-              className="text-[11px] tracking-[0.25em] uppercase text-mustard font-semibold mb-3"
+              className="text-[11px] md:text-[12px] tracking-[0.25em] uppercase text-mustard font-bold mb-3 px-3 py-1 bg-black/40 rounded-xs border border-mustard/30 backdrop-blur-xs shadow-sm"
             >
-              New Collection Drop
+              {slides[current].categoryTag}
             </motion.span>
             <motion.h1
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="font-serif font-medium text-4xl md:text-6xl text-white leading-tight mb-4 drop-shadow-sm max-w-3xl"
+              className="font-serif font-semibold text-4xl md:text-6xl text-white leading-tight mb-4 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] max-w-3xl"
             >
               {slides[current].title}
             </motion.h1>
@@ -108,7 +120,7 @@ export default function Hero() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.45, duration: 0.5 }}
-              className="text-[14px] md:text-[17px] text-cream/80 max-w-lg mb-8 font-light tracking-wide leading-relaxed"
+              className="text-[14.5px] md:text-[18px] text-white/95 max-w-xl mb-8 font-normal tracking-wide leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
             >
               {slides[current].subtitle}
             </motion.p>
@@ -119,7 +131,7 @@ export default function Hero() {
             >
               <Link
                 to={slides[current].link}
-                className="px-8 py-3.5 bg-white text-charcoal hover:bg-rust hover:text-white text-[12.5px] tracking-[0.12em] uppercase font-semibold transition-colors duration-300 shadow-md cursor-pointer inline-block"
+                className="px-9 py-4 bg-white text-charcoal hover:bg-rust hover:text-white text-[13px] tracking-[0.14em] uppercase font-bold transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-lg cursor-pointer inline-block rounded-xs"
               >
                 {slides[current].cta}
               </Link>
