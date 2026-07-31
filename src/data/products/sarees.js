@@ -1,7 +1,31 @@
 import paithaniSareeImg from "../../assets/images/categories/sarees/paithani/paithani_saree_card_image.jpg";
 import paithaniSareeSecondImg from "../../assets/images/categories/sarees/paithani/paithani_saree_second_image.jpg";
+import paithaniBlackModelImg from "../../assets/images/categories/sarees/paithani/black_paithani_model.jpg";
+import paithaniBlackSareeImg from "../../assets/images/categories/sarees/paithani/black_saree.jpeg";
+import paithaniBrownModelImg from "../../assets/images/categories/sarees/paithani/brown_saree_model.jpg";
+import paithaniBrownSareeImg from "../../assets/images/categories/sarees/paithani/brown_saree.jpeg";
+import paithaniDarkBlueModelImg from "../../assets/images/categories/sarees/paithani/dark_blue_model.jpg";
+import paithaniDarkBlueSareeImg from "../../assets/images/categories/sarees/paithani/dark_blue_saree.jpeg";
+import paithaniEmeraldGreenModelImg from "../../assets/images/categories/sarees/paithani/emerald _green_model.jpg";
+import paithaniEmeraldGreenSareeImg from "../../assets/images/categories/sarees/paithani/Emerald green .jpeg";
+import paithaniGoldModelImg from "../../assets/images/categories/sarees/paithani/golad_paithani_model.jpg";
+import paithaniGoldSareeImg from "../../assets/images/categories/sarees/paithani/gold_paithani_saree.jpeg";
+import paithaniPinkModelImg from "../../assets/images/categories/sarees/paithani/Pink_saree-model.jpg";
+import paithaniPinkSareeImg from "../../assets/images/categories/sarees/paithani/Pink_saree.jpeg";
+import paithaniPurpleModelImg from "../../assets/images/categories/sarees/paithani/purple_model.jpg";
+import paithaniPurpleSareeImg from "../../assets/images/categories/sarees/paithani/purple_saree.jpeg";
+import paithaniTerracottaModelImg from "../../assets/images/categories/sarees/paithani/Terracotta_rust_model.jpg";
+import paithaniTerracottaSareeImg from "../../assets/images/categories/sarees/paithani/Terracotta_rust_saree.jpeg";
+import paithaniPlumMaroonModelImg from "../../assets/images/categories/sarees/paithani/plum_maroon_model.jpg";
+import paithaniPlumMaroonSareeImg from "../../assets/images/categories/sarees/paithani/plum_maroon.jpeg";
 import maheshwariSareeImg from "../../assets/images/categories/sarees/maheshwari/maheshwari_saree_card_image.jpg";
-import maheshwariSareeSecondImg from "../../assets/images/categories/sarees/maheshwari/maheshwari_saree_second_image.jpg";
+import maheshwariSareeSecondImg from "../../assets/images/categories/sarees/maheshwari/meheshwari_saree_second_image.jpeg";
+import maheshwariBlueModelImg from "../../assets/images/categories/sarees/maheshwari/blue_saree_model(1).jpg";
+import maheshwariBlueOriginalImg from "../../assets/images/categories/sarees/maheshwari/blue_saree.jpeg";
+import maheshwariGreenModelImg from "../../assets/images/categories/sarees/maheshwari/green_saree_model300KB.jpg";
+import maheshwariGreenOriginalImg from "../../assets/images/categories/sarees/maheshwari/green_saree.jpeg";
+import maheshwariRedModelImg from "../../assets/images/categories/sarees/maheshwari/red_saree_model300KB.jpg";
+import maheshwariRedOriginalImg from "../../assets/images/categories/sarees/maheshwari/red_saree.jpeg";
 import fancySareeImg from "../../assets/images/categories/sarees/fancy/fancy_saree_card_image.jpg";
 import kotaDoriaImg from "../../assets/images/categories/sarees/kota-doria/kota_doria_saree_card_image.jpg";
 import ikatSareeImg from "../../assets/images/categories/sarees/ikat/ikat_saree_card_image.jpg";
@@ -47,8 +71,8 @@ export const PAITHANI_SAREES = [
     mrp: null,
     type: "saree",
     tag: "New",
-    image: "/assets/images/categories/sarees/paithani/pathani-2.jpeg",
-    images: ["/assets/images/categories/sarees/paithani/pathani-2.jpeg"],
+    image: paithaniBrownModelImg,
+    images: [paithaniBrownModelImg, paithaniBrownSareeImg],
     colors: ["#c0392b", "#d6a23f"],
     isSoldOut: false,
     highlights: {
@@ -75,8 +99,8 @@ export const PAITHANI_SAREES = [
     mrp: 11500,
     type: "saree",
     tag: "Sale",
-    image: "/assets/images/categories/sarees/paithani/paithani3.jpeg",
-    images: ["/assets/images/categories/sarees/paithani/paithani3.jpeg"],
+    image: paithaniPurpleModelImg,
+    images: [paithaniPurpleModelImg, paithaniPurpleSareeImg],
     colors: ["#4a1a6e", "#d6a23f"],
     isSoldOut: false,
     highlights: {
@@ -100,8 +124,8 @@ export const PAITHANI_SAREES = [
     mrp: null,
     type: "saree",
     tag: "Premium",
-    image: "/assets/images/categories/sarees/paithani/paithani-4.jpeg",
-    images: ["/assets/images/categories/sarees/paithani/paithani-4.jpeg"],
+    image: paithaniPinkModelImg,
+    images: [paithaniPinkModelImg, paithaniPinkSareeImg],
     colors: ["#c0106e", "#d6a23f"],
     isSoldOut: false,
     highlights: {
@@ -124,8 +148,8 @@ export const PAITHANI_SAREES = [
     mrp: 12000,
     type: "saree",
     tag: null,
-    image: "/assets/images/categories/sarees/paithani/Paithani-5.jpeg",
-    images: ["/assets/images/categories/sarees/paithani/Paithani-5.jpeg"],
+    image: paithaniEmeraldGreenModelImg,
+    images: [paithaniEmeraldGreenModelImg, paithaniEmeraldGreenSareeImg],
     colors: ["#1a4a2e", "#e9c9a5"],
     isSoldOut: false,
     highlights: { "Material composition": "Pure Paithani Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
@@ -141,8 +165,8 @@ export const PAITHANI_SAREES = [
     mrp: null,
     type: "saree",
     tag: null,
-    image: "/assets/images/categories/sarees/paithani/paithani-6.jpeg",
-    images: ["/assets/images/categories/sarees/paithani/paithani-6.jpeg"],
+    image: paithaniTerracottaModelImg,
+    images: [paithaniTerracottaModelImg, paithaniTerracottaSareeImg],
     colors: ["#bd5b34", "#d6a23f"],
     isSoldOut: false,
     highlights: { "Material composition": "Handloom Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
@@ -158,8 +182,8 @@ export const PAITHANI_SAREES = [
     mrp: 12999,
     type: "saree",
     tag: null,
-    image: "/assets/images/categories/sarees/paithani/paithani-7.jpeg",
-    images: ["/assets/images/categories/sarees/paithani/paithani-7.jpeg"],
+    image: paithaniGoldModelImg,
+    images: [paithaniGoldModelImg, paithaniGoldSareeImg],
     colors: ["#d6a23f", "#1a4a2e"],
     isSoldOut: false,
     highlights: { "Material composition": "Pure Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
@@ -175,8 +199,8 @@ export const PAITHANI_SAREES = [
     mrp: null,
     type: "saree",
     tag: null,
-    image: "/assets/images/categories/sarees/paithani/paithani-8.jpeg",
-    images: ["/assets/images/categories/sarees/paithani/paithani-8.jpeg"],
+    image: paithaniDarkBlueModelImg,
+    images: [paithaniDarkBlueModelImg, paithaniDarkBlueSareeImg],
     colors: ["#2c3e50", "#d6a23f"],
     isSoldOut: false,
     highlights: { "Material composition": "Pure Paithani Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
@@ -192,8 +216,8 @@ export const PAITHANI_SAREES = [
     mrp: 13500,
     type: "saree",
     tag: null,
-    image: "/assets/images/categories/sarees/paithani/paithani_9.jpg",
-    images: ["/assets/images/categories/sarees/paithani/paithani_9.jpg"],
+    image: paithaniBlackModelImg,
+    images: [paithaniBlackModelImg, paithaniBlackSareeImg],
     colors: ["#7d3c98", "#f1c40f"],
     isSoldOut: false,
     highlights: { "Material composition": "Handloom Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
@@ -209,8 +233,8 @@ export const PAITHANI_SAREES = [
     mrp: null,
     type: "saree",
     tag: null,
-    image: "/assets/images/categories/sarees/paithani/paithani-10.jpeg",
-    images: ["/assets/images/categories/sarees/paithani/paithani-10.jpeg"],
+    image: paithaniPlumMaroonModelImg,
+    images: [paithaniPlumMaroonModelImg, paithaniPlumMaroonSareeImg],
     colors: ["#4a1a6e", "#e9c9a5"],
     isSoldOut: false,
     highlights: { "Material composition": "Pure Paithani Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
@@ -256,8 +280,8 @@ export const MAHESHWARI_SAREES = [
     mrp: null,
     type: "saree",
     tag: "New",
-    image: "/assets/images/categories/sarees/maheshwari/6bea9b74-b3b5-4b18-bdd2-54943b740845.jpeg",
-    images: ["/assets/images/categories/sarees/maheshwari/6bea9b74-b3b5-4b18-bdd2-54943b740845.jpeg"],
+    image: maheshwariBlueModelImg,
+    images: [maheshwariBlueModelImg, maheshwariBlueOriginalImg],
     colors: ["#4a7a1e", "#e9c9a5"],
     isSoldOut: false,
     highlights: { "Material composition": "Cotton-Silk Blend", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
@@ -273,8 +297,8 @@ export const MAHESHWARI_SAREES = [
     mrp: 9000,
     type: "saree",
     tag: "Sale",
-    image: "/assets/images/categories/sarees/maheshwari/e0d24ecf-9ce3-46d9-bb3d-a80eb53168e5.jpeg",
-    images: ["/assets/images/categories/sarees/maheshwari/e0d24ecf-9ce3-46d9-bb3d-a80eb53168e5.jpeg"],
+    image: maheshwariGreenModelImg,
+    images: [maheshwariGreenModelImg, maheshwariGreenOriginalImg],
     colors: ["#2c3e50", "#bd5b34"],
     isSoldOut: false,
     highlights: { "Material composition": "Silk-Cotton", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
@@ -290,8 +314,8 @@ export const MAHESHWARI_SAREES = [
     mrp: null,
     type: "saree",
     tag: "Premium",
-    image: "/assets/images/categories/sarees/maheshwari/e0f05d66-bc71-4287-8fc7-dfce5b64b436.jpeg",
-    images: ["/assets/images/categories/sarees/maheshwari/e0f05d66-bc71-4287-8fc7-dfce5b64b436.jpeg"],
+    image: maheshwariRedModelImg,
+    images: [maheshwariRedModelImg, maheshwariRedOriginalImg],
     colors: ["#7d3c98", "#f1c40f"],
     isSoldOut: false,
     highlights: { "Material composition": "Handloom Cotton-Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
