@@ -38,8 +38,8 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Festive",
-    price: 8500,
-    mrp: 10999,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: "Bestseller",
     image: paithaniSareeImg,
@@ -47,18 +47,17 @@ export const PAITHANI_SAREES = [
     colors: ["#1a4a2e", "#d6a23f"],
     isSoldOut: false,
     highlights: {
-      "Material composition": "Pure Handloom Paithani Silk",
+      "Material composition": "Banarasi Katan Soft Silk",
       "Saree length": "5.5 Meters",
-      "Blouse piece": "Included (0.8m unstitched)",
-      "Weave": "Handwoven Royal Peacock Motifs & Gold Zari Pallu",
+      "Blouse piece": "Brocade Blouse Piece Included",
+      "Weave": "Banarasi Peacock Border Paithani with All over Butta",
       "Occasion": "Festive, Wedding, and Royal Ceremonies",
       "Care instructions": "Dry Clean Only",
       "Country of Origin": "India"
     },
     aboutThisItem: [
-      "Exquisite handloom woven Paithani saree featuring a rich, golden peacock border.",
-      "Adorned with intricate gold zari work and decorative traditional pallu.",
-      "Holds pleats gracefully for a regal silhouette."
+      "Banarasi Peacock Border Paithani in Katan Soft silk featuring all over Butta.",
+      "Adorned with brocade blouse piece and regal border."
     ]
   },
   {
@@ -67,8 +66,8 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Wedding",
-    price: 8800,
-    mrp: null,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: "New",
     image: paithaniBrownModelImg,
@@ -76,17 +75,16 @@ export const PAITHANI_SAREES = [
     colors: ["#c0392b", "#d6a23f"],
     isSoldOut: false,
     highlights: {
-      "Material composition": "Handloom Mulberry Silk",
+      "Material composition": "Banarasi Katan Soft Silk",
       "Saree length": "5.5 Meters",
-      "Blouse piece": "Included (0.8m unstitched)",
-      "Weave": "Traditional Maharani Zari Weave",
+      "Blouse piece": "Brocade Blouse Piece Included",
+      "Weave": "Banarasi Peacock Border with All over Butta",
       "Occasion": "Wedding Bridal Ceremony",
       "Care instructions": "Dry Clean Only",
       "Country of Origin": "India"
     },
     aboutThisItem: [
-      "Rich crimson red Paithani saree with classic gold zari embroidery.",
-      "Hand-dyed with vibrant natural pigments."
+      "Rich crimson red Paithani saree with classic gold zari embroidery and brocade blouse piece."
     ]
   },
   {
@@ -95,8 +93,8 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Festive",
-    price: 9100,
-    mrp: 11500,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: "Sale",
     image: paithaniPurpleModelImg,
@@ -104,15 +102,15 @@ export const PAITHANI_SAREES = [
     colors: ["#4a1a6e", "#d6a23f"],
     isSoldOut: false,
     highlights: {
-      "Material composition": "Pure Handloom Silk Blend",
+      "Material composition": "Katan Soft Silk",
       "Saree length": "5.5 Meters",
-      "Blouse piece": "Included",
-      "Weave": "Gold Zari Border",
+      "Blouse piece": "Brocade Blouse Piece Included",
+      "Weave": "Gold Zari Border & Peacock Motifs",
       "Occasion": "Festive & Ceremonial",
       "Care instructions": "Dry Clean Only",
       "Country of Origin": "India"
     },
-    aboutThisItem: ["Deep royal purple silk drape with heavy zari border."]
+    aboutThisItem: ["Deep royal purple silk drape with peacock border and all over Butta."]
   },
   {
     id: 103,
@@ -120,8 +118,8 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Autumn",
-    price: 9400,
-    mrp: null,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: "Premium",
     image: paithaniPinkModelImg,
@@ -129,14 +127,14 @@ export const PAITHANI_SAREES = [
     colors: ["#c0106e", "#d6a23f"],
     isSoldOut: false,
     highlights: {
-      "Material composition": "Silk Blend",
+      "Material composition": "Katan Soft Silk",
       "Saree length": "5.5 Meters",
-      "Blouse piece": "Included",
+      "Blouse piece": "Brocade Blouse Piece Included",
       "Occasion": "Festive",
       "Care instructions": "Dry Clean Only",
       "Country of Origin": "India"
     },
-    aboutThisItem: ["Stunning magenta shade with metallic zari motifs."]
+    aboutThisItem: ["Stunning magenta shade with metallic zari motifs and brocade blouse piece."]
   },
   {
     id: 104,
@@ -144,16 +142,16 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Winter",
-    price: 9700,
-    mrp: 12000,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: null,
     image: paithaniEmeraldGreenModelImg,
     images: [paithaniEmeraldGreenModelImg, paithaniEmeraldGreenSareeImg],
     colors: ["#1a4a2e", "#e9c9a5"],
     isSoldOut: false,
-    highlights: { "Material composition": "Pure Paithani Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
-    aboutThisItem: ["Emerald green hue adorned with intricate gold embroidery."]
+    highlights: { "Material composition": "Banarasi Katan Soft Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
+    aboutThisItem: ["Emerald green hue adorned with peacock border and all over Butta."]
   },
   {
     id: 105,
@@ -161,16 +159,16 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Spring",
-    price: 10000,
-    mrp: null,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: null,
     image: paithaniTerracottaModelImg,
     images: [paithaniTerracottaModelImg, paithaniTerracottaSareeImg],
     colors: ["#bd5b34", "#d6a23f"],
     isSoldOut: false,
-    highlights: { "Material composition": "Handloom Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
-    aboutThisItem: ["Earthy terracotta tone with rich gold weaves."]
+    highlights: { "Material composition": "Katan Soft Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
+    aboutThisItem: ["Earthy terracotta tone with rich peacock border weaves."]
   },
   {
     id: 106,
@@ -178,16 +176,16 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Festive",
-    price: 10300,
-    mrp: 12999,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: null,
     image: paithaniGoldModelImg,
     images: [paithaniGoldModelImg, paithaniGoldSareeImg],
     colors: ["#d6a23f", "#1a4a2e"],
     isSoldOut: false,
-    highlights: { "Material composition": "Pure Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
-    aboutThisItem: ["Luminous mustard yellow saree featuring royal borders."]
+    highlights: { "Material composition": "Katan Soft Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
+    aboutThisItem: ["Luminous mustard yellow saree featuring peacock borders."]
   },
   {
     id: 107,
@@ -195,16 +193,16 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Winter",
-    price: 10600,
-    mrp: null,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: null,
     image: paithaniDarkBlueModelImg,
     images: [paithaniDarkBlueModelImg, paithaniDarkBlueSareeImg],
     colors: ["#2c3e50", "#d6a23f"],
     isSoldOut: false,
-    highlights: { "Material composition": "Pure Paithani Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
-    aboutThisItem: ["Midnight navy silk with contrasting metallic gold pallu."]
+    highlights: { "Material composition": "Katan Soft Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
+    aboutThisItem: ["Midnight navy silk with contrasting metallic gold pallu & brocade blouse."]
   },
   {
     id: 108,
@@ -212,16 +210,16 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Festive",
-    price: 10900,
-    mrp: 13500,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: null,
     image: paithaniBlackModelImg,
     images: [paithaniBlackModelImg, paithaniBlackSareeImg],
     colors: ["#7d3c98", "#f1c40f"],
     isSoldOut: false,
-    highlights: { "Material composition": "Handloom Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
-    aboutThisItem: ["Rich violet silk with exquisite handloom detailing."]
+    highlights: { "Material composition": "Katan Soft Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
+    aboutThisItem: ["Rich violet silk with exquisite peacock border detailing."]
   },
   {
     id: 109,
@@ -229,16 +227,16 @@ export const PAITHANI_SAREES = [
     cat: "Sarees",
     subcat: "Paithani",
     season: "Autumn",
-    price: 11200,
-    mrp: null,
+    price: 3550,
+    mrp: 4499,
     type: "saree",
     tag: null,
     image: paithaniPlumMaroonModelImg,
     images: [paithaniPlumMaroonModelImg, paithaniPlumMaroonSareeImg],
     colors: ["#4a1a6e", "#e9c9a5"],
     isSoldOut: false,
-    highlights: { "Material composition": "Pure Paithani Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
-    aboutThisItem: ["Deep plum shade adorned with shimmering golden pallu."]
+    highlights: { "Material composition": "Katan Soft Silk", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
+    aboutThisItem: ["Deep plum shade adorned with shimmering golden peacock pallu."]
   }
 ];
 
@@ -379,20 +377,28 @@ export const ILKAL_SAREES = Array.from({ length: 6 }, (_, i) => ({
 
 export const KOTA_DORIYA_SAREES = Array.from({ length: 6 }, (_, i) => ({
   id: 132 + i,
-  name: `Lightweight Zari Border Kota Doriya Saree - Style ${i + 1}`,
+  name: i === 0 ? "100% Pure Silk Kota Saree - Bandhej Tye & Dye" : `Pure Silk Kota Doriya Saree - Style ${i + 1}`,
   cat: "Sarees",
   subcat: "Kota Doriya",
   season: "Summer",
-  price: 5500 + i * 150,
-  mrp: Math.round((5500 + i * 150) * 1.25 / 100) * 100,
+  price: 3250,
+  mrp: 3999,
   type: "saree",
   tag: i === 0 ? "Premium" : null,
   image: kotaDoriaImg,
   images: [kotaDoriaImg],
   colors: ["#2c3e50", "#bd5b34"],
-  isSoldOut: true,
-  highlights: { "Material composition": "Translucent Kota Doriya Cotton", "Saree length": "5.5 Meters", "Care instructions": "Dry Clean Only", "Country of Origin": "India" },
-  aboutThisItem: ["Ultra-lightweight checkered translucent cotton saree."]
+  isSoldOut: false,
+  highlights: {
+    "Material composition": "100% Pure Silk Kota",
+    "Work": "Hand Shaded Bandhej Tye & Dye",
+    "Saree length": "5.5 Meters",
+    "Blouse piece": "1 Meter Included",
+    "Dispatch time": "5-6 Days",
+    "Care instructions": "Dry Clean Only",
+    "Country of Origin": "India"
+  },
+  aboutThisItem: ["100% Pure Silk Kota Saree from Premium Collection featuring hand shaded Bandhej Tye & Dye with 1 Meter blouse piece."]
 }));
 
 export const SAREES_PRODUCTS = [

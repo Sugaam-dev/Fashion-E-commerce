@@ -6,7 +6,7 @@ export const COLLECTION_CATEGORIES = [
   },
   {
     name: "Dress Material",
-    image: "https://images.unsplash.com/photo-1558171813-0e3a28c4b59e?auto=format&fit=crop&w=600&q=80",
+    image: "https://peachmode.com/cdn/shop/products/navy-blue-printed-poly-cotton-dress-material-peachmode-1.jpg?v=1669043805&width=2000",
     subcats: ["Ikat", "Jamdani", "Kota Doriya", "Maheshwari", "Narayan Peth"],
   },
   {
