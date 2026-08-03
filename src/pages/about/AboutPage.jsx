@@ -1,47 +1,8 @@
 import { motion } from "motion/react";
-import { Leaf, Handshake, Sparkles, Award, Users, Star, ThumbsUp } from "lucide-react";
+
 
 export default function AboutPage() {
-  const pillars = [
-    {
-      icon: <Leaf className="text-rust stroke-[1.5] w-8 h-8 mx-auto mb-4" />,
-      title: "Sustainably Sourced",
-      description: "We use 100% natural, biodegradable fibers. Our fabrics are handspun and dyed using eco-friendly compounds to reduce our ecological footprint."
-    },
-    {
-      icon: <Handshake className="text-rust stroke-[1.5] w-8 h-8 mx-auto mb-4" />,
-      title: "Direct Fair Trade",
-      description: "By cutting out middlemen, we ensure our weaver communities receive fair wages and stable livelihoods, keeping centuries-old craft traditions alive."
-    },
-    {
-      icon: <Sparkles className="text-rust stroke-[1.5] w-8 h-8 mx-auto mb-4" />,
-      title: "Bespoke Customization",
-      description: "Every woman deserves clothes that fit her perfectly. Our made-to-measure tailoring service customizes garments to fit your unique shape."
-    }
-  ];
 
-  const stats = [
-    {
-      icon: <Award className="text-rust stroke-[1.8] w-5 h-5 mx-auto mb-2" />,
-      value: "40+",
-      label: "Weaver Communities"
-    },
-    {
-      icon: <Users className="text-rust stroke-[1.8] w-5 h-5 mx-auto mb-2" />,
-      value: "12K+",
-      label: "Happy Clients"
-    },
-    {
-      icon: <ThumbsUp className="text-rust stroke-[1.8] w-5 h-5 mx-auto mb-2" />,
-      value: "100%",
-      label: "Handcrafted"
-    },
-    {
-      icon: <Star className="text-rust stroke-[1.8] w-5 h-5 mx-auto mb-2" />,
-      value: "4.8★",
-      label: "Customer Rating"
-    }
-  ];
 
   return (
     <div className="bg-cream min-h-screen py-16 md:py-24 overflow-hidden">
@@ -106,58 +67,7 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
-        {/* Section 2: Core Values Grid (The Pillars) */}
-        <div className="border-t border-b border-line py-16 md:py-24 mb-20 md:mb-32">
-          <motion.h3 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-serif text-3xl md:text-4xl font-semibold text-center text-charcoal mb-16"
-          >
-            The Pillars of Shreekamalinee
-          </motion.h3>
-          <div className="grid md:grid-cols-3 gap-8 md:gap-10">
-            {pillars.map((pillar, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 35 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
-                className="border border-line rounded-sm p-8 bg-white/40 backdrop-blur-xs text-center shadow-xs hover:border-rust hover:bg-white hover:shadow-md transition-all duration-500 flex flex-col justify-between"
-              >
-                <div>
-                  {pillar.icon}
-                  <h4 className="font-serif text-lg font-bold mb-4 text-charcoal">{pillar.title}</h4>
-                  <p className="text-[13.5px] leading-relaxed text-charcoal/60">
-                    {pillar.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
 
-        {/* Section 3: Weaver Stats Dash */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 p-8 border border-line bg-white/40 backdrop-blur-xs rounded-sm divide-y md:divide-y-0 md:divide-x divide-line text-center shadow-xs"
-        >
-          {stats.map((stat, idx) => (
-            <div key={idx} className="pt-6 md:pt-0 md:px-4 first:pt-0">
-              {stat.icon}
-              <b className="font-serif text-4xl md:text-5xl block text-rust font-bold mb-2 tracking-tight">
-                {stat.value}
-              </b>
-              <span className="text-[10px] md:text-[11px] tracking-widest uppercase text-charcoal/50 font-semibold">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
 
         {/* Section 4: Founders Signature / Philosophy Quote */}
         <motion.div 

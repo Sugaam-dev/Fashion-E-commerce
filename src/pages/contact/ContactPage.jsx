@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageCircle, Mail, MapPin, Send } from "lucide-react";
+import { MessageCircle, Mail, Send } from "lucide-react";
 import { useCart } from "../../context/CartContext.jsx";
 
 export default function ContactPage() {
@@ -30,13 +30,7 @@ export default function ContactPage() {
         <div className="grid md:grid-cols-2 gap-12 md:gap-20">
           {/* Left: Contact Info */}
           <div>
-            <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-6 text-charcoal">
-              Bespoke Made-to-Measure Consultations
-            </h2>
-            <p className="text-[15px] leading-relaxed text-charcoal/60 mb-8 max-w-md">
-              Need custom sizing for a saree blouse or a bespoke jewellery matching service? 
-              Connect with our design team. You can chat directly on WhatsApp or drop us an email.
-            </p>
+
 
             <div className="space-y-6 mb-10">
               <div className="flex gap-4 items-start">
@@ -64,24 +58,13 @@ export default function ContactPage() {
                   <p className="text-sm text-charcoal/70">support@Shreekamalinee.com</p>
                 </div>
               </div>
-              <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-full bg-rust/10 flex items-center justify-center text-rust flex-shrink-0">
-                  <MapPin size={18} className="stroke-[1.8]" />
-                </div>
-                <div>
-                  <h4 className="font-serif text-base font-bold text-charcoal">Design Studio Office</h4>
-                  <p className="text-sm text-charcoal/70 leading-relaxed">
-                    Shreekamalinee Studio
-                  </p>
-                </div>
-              </div>
+
             </div>
 
             <div className="border-t border-line pt-8">
-              <h3 className="font-serif text-lg font-bold mb-3">Studio Hours</h3>
+              <h3 className="font-serif text-lg font-bold mb-3">Contact Hours</h3>
               <p className="text-sm text-charcoal/60 leading-relaxed">
-                Monday to Saturday: 10:00 AM – 7:00 PM IST <br />
-                Sunday: Closed (Online support available)
+                Monday to Friday: 10:00 AM – 7:00 PM IST
               </p>
             </div>
           </div>

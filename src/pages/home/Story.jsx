@@ -1,25 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { Award, Users, Star, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Story() {
-  const stats = [
-    {
-      icon: <Award className="text-rust stroke-[1.5] w-5 h-5 mb-2" />,
-      value: "40+",
-      label: "Weaver Partners"
-    },
-    {
-      icon: <Users className="text-rust stroke-[1.5] w-5 h-5 mb-2" />,
-      value: "12K+",
-      label: "Happy Divas"
-    },
-    {
-      icon: <Star className="text-rust stroke-[1.5] w-5 h-5 mb-2" />,
-      value: "4.7★",
-      label: "Average Rating"
-    }
-  ];
+
 
   return (
     <section id="story" className="pt-4 md:pt-8 pb-16 md:pb-24 bg-cream">
@@ -73,27 +57,7 @@ export default function Story() {
             </Link>
           </div>
 
-          {/* Decorative stats cards */}
-          <div className="grid grid-cols-3 gap-4 pt-6 border-t border-line/60">
-            {stats.map((stat, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
-                className="border border-line rounded-sm p-4 bg-white/30 backdrop-blur-xs flex flex-col items-center text-center hover:border-rust hover:bg-white/60 hover:shadow-xs transition-all duration-300"
-              >
-                {stat.icon}
-                <strong className="font-serif text-[22px] md:text-[26px] leading-none text-charcoal block mb-1">
-                  {stat.value}
-                </strong>
-                <span className="text-[9.5px] md:text-[10px] tracking-wider uppercase text-charcoal/45 font-semibold block leading-tight">
-                  {stat.label}
-                </span>
-              </motion.div>
-            ))}
-          </div>
+
         </motion.div>
 
       </div>

@@ -63,14 +63,14 @@ export default function Navbar() {
               className="h-22 w-auto"
             />
           </Link>
-          <div className="hidden lg:flex gap-8 text-[13px] tracking-[0.08em] uppercase font-medium">
+          <div className="hidden lg:flex gap-1 text-[13px] tracking-[0.08em] uppercase font-medium">
             {navItems.map((item) => (
               item.isLogin ? (
                 <a
                   key={item.label}
                   href="#login"
                   onClick={handleLoginClick}
-                  className="relative py-1 text-rust hover:text-rust-deep after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-px hover:after:w-full after:transition-all after:bg-rust-deep"
+                  className="relative px-2.5 py-1 rounded-full text-rust font-semibold transition-all duration-250 hover:bg-[#f4eee3] hover:text-[#4A3228]"
                 >
                   {item.label}
                 </a>
@@ -82,15 +82,20 @@ export default function Navbar() {
                   onMouseLeave={() => setDesktopOpen(false)}
                 >
                   <span
-                    className={`relative py-1 cursor-pointer transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-px hover:after:w-full after:transition-all ${
+                    className={`relative px-2.5 py-1 rounded-full cursor-pointer transition-all duration-250 flex items-center gap-1 ${
                       location.pathname.startsWith("/product") && location.search.includes("category")
-                        ? "text-rust after:w-full after:bg-rust"
-                        : "hover:text-rust after:w-0 after:bg-rust"
+                        ? "text-[#fbf8f3] font-semibold"
+                        : "text-charcoal hover:bg-[#f4eee3] hover:text-[#4A3228]"
                     }`}
+                    style={location.pathname.startsWith("/product") && location.search.includes("category")
+                      ? { backgroundColor: "#4A3228", boxShadow: "0 2px 10px rgba(74,50,40,0.22)" }
+                      : {}}
                   >
                     {item.label}
+                    <ChevronDown size={12} className={`transition-transform duration-200 ${desktopOpen ? "rotate-180" : ""} ${
+                      location.pathname.startsWith("/product") && location.search.includes("category") ? "opacity-80" : "opacity-50"
+                    }`} />
                   </span>
-                  
                   {/* Mega Menu Dropdown */}
                   <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ease-out z-50 ${
                     desktopOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2"
@@ -144,11 +149,14 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   to={item.path}
-                  className={`relative py-1 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-px hover:after:w-full after:transition-all ${
+                  className={`relative px-2.5 py-1 rounded-full transition-all duration-250 ${
                     location.pathname === item.path && !location.search.includes("category")
-                      ? "text-rust after:w-full after:bg-rust"
-                      : "hover:text-rust after:w-0 after:bg-rust"
+                      ? "text-[#fbf8f3] font-semibold"
+                      : "text-charcoal hover:bg-[#f4eee3] hover:text-[#4A3228]"
                   }`}
+                  style={location.pathname === item.path && !location.search.includes("category")
+                    ? { backgroundColor: "#4A3228", boxShadow: "0 2px 10px rgba(74,50,40,0.22)" }
+                    : {}}
                 >
                   {item.label}
                 </Link>
@@ -304,8 +312,18 @@ export default function Navbar() {
                   key={item.label}
                   to={item.path}
                   onClick={() => setMobileOpen(false)}
-                  className={`py-1 ${location.pathname === item.path ? "text-rust font-semibold" : "hover:text-rust"}`}
+                  className={`py-1.5 px-3 rounded-lg flex items-center gap-2 transition-all duration-250 ${
+                    location.pathname === item.path
+                      ? "text-[#fbf8f3] font-semibold"
+                      : "text-charcoal hover:bg-[#f4eee3] hover:text-[#4A3228]"
+                  }`}
+                  style={location.pathname === item.path
+                    ? { backgroundColor: "#4A3228" }
+                    : {}}
                 >
+                  {location.pathname === item.path && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#fbf8f3] flex-shrink-0" />
+                  )}
                   {item.label}
                 </Link>
               )
