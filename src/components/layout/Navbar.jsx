@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, Heart, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { useCart } from "../../context/CartContext.jsx";
@@ -10,6 +10,16 @@ export default function Navbar() {
   const [mobileCollectionsOpen, setMobileCollectionsOpen] = useState(false);
   const [mobileActiveCategory, setMobileActiveCategory] = useState(null);
   const [desktopOpen, setDesktopOpen] = useState(false);
+  const closeTimerRef = useRef(null);
+
+  const handleMegaEnter = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setDesktopOpen(true);
+  };
+
+  const handleMegaLeave = () => {
+    closeTimerRef.current = setTimeout(() => setDesktopOpen(false), 150);
+  };
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchVal, setSearchVal] = useState("");
   const location = useLocation();
@@ -22,7 +32,6 @@ export default function Navbar() {
     { label: "Home", path: "/" },
     { label: "About", path: "/about" },
     { label: "Collections", path: "#", isMega: true },
-    { label: "Product", path: "/product" },
     { label: "Contact", path: "/contact" },
     //{ label: "Login", path: "/login", isLogin: true }
   ];
@@ -82,8 +91,8 @@ export default function Navbar() {
                 <div 
                   key={item.label} 
                   className="py-1"
-                  onMouseEnter={() => setDesktopOpen(true)}
-                  onMouseLeave={() => setDesktopOpen(false)}
+                  onMouseEnter={handleMegaEnter}
+                  onMouseLeave={handleMegaLeave}
                 >
                   <span
                     className={`cursor-pointer px-4 py-1.5 rounded-full flex items-center gap-1.5 transition-all duration-300 ease-out ${
@@ -98,9 +107,15 @@ export default function Navbar() {
                     }`} />
                   </span>
                   {/* Mega Menu Dropdown */}
-                  <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-300 ease-out z-50 ${
-                    desktopOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
-                  }`}>
+                  <div
+                    className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-300 ease-out z-50 ${
+                      desktopOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
+                    }`}
+                    onMouseEnter={handleMegaEnter}
+                    onMouseLeave={handleMegaLeave}
+                  >
+                    {/* Transparent hover bridge fills the exact pt-2 (8px) gap without shifting the dropdown */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-2 w-[1050px] max-w-[98vw] bg-transparent" />
                     <div className="bg-[#FAF7F2]/98 backdrop-blur-xl border border-[#E6DFD3] shadow-[0_25px_60px_-15px_rgba(34,29,27,0.12)] p-8 rounded-lg w-[1000px] max-w-[95vw] relative overflow-hidden">
                       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D6A23F]/60 to-transparent" />
                       <div className="grid grid-cols-4 gap-8">
