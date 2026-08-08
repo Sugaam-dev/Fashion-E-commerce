@@ -401,6 +401,31 @@ export const KOTA_DORIYA_SAREES = Array.from({ length: 6 }, (_, i) => ({
   aboutThisItem: ["100% Pure Silk Kota Saree from Premium Collection featuring hand shaded Bandhej Tye & Dye with 1 Meter blouse piece."]
 }));
 
+export const AJRAKH_SAREES = Array.from({ length: 6 }, (_, i) => ({
+  id: 138 + i,
+  name: i === 0 ? "Kutch Handloom Natural Dye Ajrakh Modal Silk Saree" : `Traditional Ajrakh Block Printed Silk Saree - Style ${i + 1}`,
+  cat: "Sarees",
+  subcat: "Ajrakh",
+  season: "All Season",
+  price: 4850 + i * 200,
+  mrp: Math.round((4850 + i * 200) * 1.25 / 100) * 100,
+  type: "saree",
+  tag: i === 0 ? "New" : (i === 1 ? "Bestseller" : null),
+  image: ikatSareeImg,
+  images: [ikatSareeImg],
+  colors: ["#bd5b34", "#2c3e50"],
+  isSoldOut: false,
+  highlights: {
+    "Material composition": "Pure Modal Silk",
+    "Print": "Traditional Kutch Hand-Block Ajrakh Print",
+    "Saree length": "5.5 Meters",
+    "Blouse piece": "Included (0.8m Printed Modal Silk)",
+    "Care instructions": "Dry Clean Only",
+    "Country of Origin": "India"
+  },
+  aboutThisItem: ["Exquisite handcrafted Modal Silk saree featuring authentic Ajrakh geometric hand-block motifs using organic natural dyes."]
+}));
+
 export const SAREES_PRODUCTS = [
   ...PAITHANI_SAREES,
   ...MAHESHWARI_SAREES,
@@ -408,4 +433,5 @@ export const SAREES_PRODUCTS = [
   ...IKAT_SAREES,
   ...ILKAL_SAREES,
   ...KOTA_DORIYA_SAREES,
+  ...AJRAKH_SAREES,
 ];

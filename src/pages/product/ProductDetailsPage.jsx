@@ -177,7 +177,7 @@ export default function ProductDetailsPage() {
         Select Size Option
       </span>
       <button
-        onClick={() => alert("Size guide opened (Mock).")}
+        onClick={() => showToast("Size Guide: S (36\"), M (38\"), L (40\"), XL (42\"), XXL (44\")")}
         className="text-[11px] text-rust underline hover:text-rust-deep cursor-pointer font-medium"
       >
         Size Guide

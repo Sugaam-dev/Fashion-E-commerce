@@ -25,7 +25,7 @@ export function CartProvider({ children }) {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
-  const [toast, setToast] = useState({ show: false, msg: "" });
+  const [toast, setToast] = useState({ show: false, msg: "", type: "info" });
 
   // Sync cart to localStorage
   useEffect(() => {
@@ -37,9 +37,9 @@ export function CartProvider({ children }) {
     localStorage.setItem("wishlist", JSON.stringify(Array.from(wishlist)));
   }, [wishlist]);
 
-  const showToast = useCallback((msg) => {
-    setToast({ show: true, msg });
-    setTimeout(() => setToast({ show: false, msg: "" }), 2200);
+  const showToast = useCallback((msg, type = "info") => {
+    setToast({ show: true, msg, type });
+    setTimeout(() => setToast({ show: false, msg: "", type: "info" }), 3000);
   }, []);
 
   const addToCart = useCallback((product) => {
@@ -50,7 +50,7 @@ export function CartProvider({ children }) {
       }
       return [...prev, { ...product, qty: 1 }];
     });
-    showToast("Added to bag");
+    showToast("Added to shopping bag", "cart");
     setDrawerOpen(true);
   }, [showToast]);
 
@@ -77,7 +77,7 @@ export function CartProvider({ children }) {
         next.delete(id);
       } else {
         next.add(id);
-        showToast("Added to wishlist ♡");
+        showToast("Saved to your wishlist", "wishlist");
       }
       return next;
     });

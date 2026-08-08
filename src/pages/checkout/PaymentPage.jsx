@@ -5,52 +5,54 @@ import { useCart } from "../../context/CartContext.jsx";
 export default function PaymentPage({ onComplete }) {
   const { cart, clearCart, showToast } = useCart();
   const [form, setForm] = useState({ name: "", phone: "", address: "", utr: "", file: null });
+  const [errors, setErrors] = useState({});
 
   const totalAmount = cart.reduce((s, item) => s + item.price * item.qty, 0);
 
   function validateForm(isPrepaid) {
+    const errs = {};
     const name = form.name.trim();
     if (!name) {
-      alert("Please enter your Full Name.");
-      return false;
-    }
-    if (name.length < 2) {
-      alert("Full Name must be at least 2 characters long.");
-      return false;
+      errs.name = "Full Name is required.";
+    } else if (name.length < 2) {
+      errs.name = "Full Name must be at least 2 characters long.";
     }
 
     const phone = form.phone.trim().replace(/\D/g, "");
     if (!phone) {
-      alert("Please enter your Phone Number.");
-      return false;
-    }
-    const phoneRegex = /^[6-9]\d{9}$/;
-    if (!phoneRegex.test(phone)) {
-      alert("Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.");
-      return false;
+      errs.phone = "Phone number is required.";
+    } else {
+      const phoneRegex = /^[6-9]\d{9}$/;
+      if (!phoneRegex.test(phone)) {
+        errs.phone = "Enter a valid 10-digit mobile number.";
+      }
     }
 
     const address = form.address.trim();
     if (!address) {
-      alert("Please enter your Delivery Address.");
-      return false;
-    }
-    if (address.length < 10) {
-      alert("Please enter a complete delivery address with landmark and PIN code (at least 10 characters).");
-      return false;
+      errs.address = "Delivery address is required.";
+    } else if (address.length < 10) {
+      errs.address = "Please enter a complete address with PIN code (at least 10 characters).";
     }
 
     if (isPrepaid) {
       const utr = form.utr.trim();
       if (!utr) {
-        alert("Please enter a Transaction ID / UTR number for Prepaid verification.");
-        return false;
+        errs.utr = "Transaction ID / UTR number is required for prepaid verification.";
+      } else {
+        const utrRegex = /^[a-zA-Z0-9]{6,18}$/;
+        if (!utrRegex.test(utr)) {
+          errs.utr = "Enter a valid UTR number (6-18 characters).";
+        }
       }
-      const utrRegex = /^[a-zA-Z0-9]{6,18}$/;
-      if (!utrRegex.test(utr)) {
-        alert("Please enter a valid Transaction ID / UTR (6 to 18 alphanumeric characters).");
-        return false;
-      }
+    }
+
+    setErrors(errs);
+
+    if (Object.keys(errs).length > 0) {
+      const firstErr = Object.values(errs)[0];
+      showToast(firstErr, "warning");
+      return false;
     }
 
     return true;
@@ -250,41 +252,56 @@ Thank you for shopping with Shreekamalinee!`;
               Please enter your shipping address and submit your order details via WhatsApp.
             </p>
 
-            <form onSubmit={handlePrepaidOrder} className="space-y-5">
+            <form onSubmit={handlePrepaidOrder} noValidate className="space-y-5">
               <div>
-                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Full Name</label>
+                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Full Name *</label>
                 <input
                   type="text"
-                  required
                   value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  onChange={(e) => {
+                    setForm({ ...form, name: e.target.value });
+                    if (errors.name) setErrors({ ...errors, name: null });
+                  }}
                   placeholder="Enter recipient's name"
-                  className="w-full px-4 py-3 border border-line bg-cream text-sm outline-none focus:border-rust"
+                  className={`w-full px-4 py-3 border bg-cream text-sm outline-none transition-colors ${
+                    errors.name ? "border-rose-500 focus:border-rose-600 bg-rose-50/30" : "border-line focus:border-rust"
+                  }`}
                 />
+                {errors.name && <p className="text-[11.5px] text-rose-600 mt-1 font-medium">{errors.name}</p>}
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Phone Number</label>
+                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Phone Number *</label>
                 <input
                   type="tel"
-                  required
                   value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  onChange={(e) => {
+                    setForm({ ...form, phone: e.target.value });
+                    if (errors.phone) setErrors({ ...errors, phone: null });
+                  }}
                   placeholder="10-digit mobile number"
-                  className="w-full px-4 py-3 border border-line bg-cream text-sm outline-none focus:border-rust"
+                  className={`w-full px-4 py-3 border bg-cream text-sm outline-none transition-colors ${
+                    errors.phone ? "border-rose-500 focus:border-rose-600 bg-rose-50/30" : "border-line focus:border-rust"
+                  }`}
                 />
+                {errors.phone && <p className="text-[11.5px] text-rose-600 mt-1 font-medium">{errors.phone}</p>}
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Delivery Address</label>
+                <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">Delivery Address *</label>
                 <textarea
-                  required
                   rows="3"
                   value={form.address}
-                  onChange={(e) => setForm({ ...form, address: e.target.value })}
+                  onChange={(e) => {
+                    setForm({ ...form, address: e.target.value });
+                    if (errors.address) setErrors({ ...errors, address: null });
+                  }}
                   placeholder="Enter full shipping address with state and PIN code"
-                  className="w-full px-4 py-3 border border-line bg-cream text-sm outline-none focus:border-rust resize-none"
+                  className={`w-full px-4 py-3 border bg-cream text-sm outline-none resize-none transition-colors ${
+                    errors.address ? "border-rose-500 focus:border-rose-600 bg-rose-50/30" : "border-line focus:border-rust"
+                  }`}
                 />
+                {errors.address && <p className="text-[11.5px] text-rose-600 mt-1 font-medium">{errors.address}</p>}
               </div>
 
               <div className="pt-2 border-t border-line/60">
@@ -293,12 +310,19 @@ Thank you for shopping with Shreekamalinee!`;
                 <input
                   type="text"
                   value={form.utr}
-                  onChange={(e) => setForm({ ...form, utr: e.target.value })}
+                  onChange={(e) => {
+                    setForm({ ...form, utr: e.target.value });
+                    if (errors.utr) setErrors({ ...errors, utr: null });
+                  }}
                   placeholder="12-digit transaction ID (if paid online)"
-                  className="w-full px-4 py-3 border border-line bg-cream text-sm outline-none focus:border-rust tracking-wider"
+                  className={`w-full px-4 py-3 border bg-cream text-sm outline-none tracking-wider transition-colors ${
+                    errors.utr ? "border-rose-500 focus:border-rose-600 bg-rose-50/30" : "border-line focus:border-rust"
+                  }`}
                 />
+                {errors.utr && <p className="text-[11.5px] text-rose-600 mt-1 font-medium">{errors.utr}</p>}
               </div>
 
+              {/* Upload Receipt Screenshot Section (Commented out)
               <div>
                 <label className="block text-xs uppercase tracking-wider text-charcoal/60 mb-2 font-medium">
                   Upload Receipt Screenshot (Optional)
@@ -314,7 +338,6 @@ Thank you for shopping with Shreekamalinee!`;
                   <span className="block text-[10px] text-charcoal/40">PNG, JPG up to 5MB</span>
                 </div>
                 
-                {/* Note about manual WhatsApp attachment */}
                 <div className="mt-3 p-3 bg-rust/5 border border-rust/10 rounded-sm text-[11.5px] leading-relaxed text-rust-deep flex items-start gap-2 animate-fadeIn">
                   <span className="shrink-0 text-xs">💡</span>
                   <p>
@@ -322,6 +345,7 @@ Thank you for shopping with Shreekamalinee!`;
                   </p>
                 </div>
               </div>
+              */}
 
               <div className="space-y-3 pt-4">
                 <button

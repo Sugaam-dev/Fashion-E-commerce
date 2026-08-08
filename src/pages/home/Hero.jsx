@@ -96,15 +96,15 @@ export default function Hero() {
             transition={{ duration: 5500, ease: "easeOut" }}
             className="w-full h-full object-cover object-[center_30%]"
           />
-          {/* Dark black overlay gradient for high contrast & pop out text */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/45 backdrop-brightness-[0.75]" />
+          {/* Reduced lighter overlay so background imagery is bright & clear */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-black/10" />
           
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6 z-20">
             <motion.span
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.15, duration: 0.5 }}
-              className="text-[11px] md:text-[12px] tracking-[0.25em] uppercase text-mustard font-bold mb-3 px-3 py-1 bg-black/40 rounded-xs border border-mustard/30 backdrop-blur-xs shadow-sm"
+              className="text-[10.5px] md:text-[12px] tracking-[0.3em] uppercase text-mustard font-semibold mb-4 px-4 py-1.5 bg-black/40 rounded-full border border-mustard/40 backdrop-blur-sm shadow-md drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
             >
               {slides[current].categoryTag}
             </motion.span>
@@ -112,7 +112,7 @@ export default function Hero() {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="font-serif font-semibold text-4xl md:text-6xl text-white leading-tight mb-4 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] max-w-3xl"
+              className="font-serif font-bold text-3xl sm:text-5xl md:text-6xl text-white leading-[1.18] mb-4 drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] max-w-3xl"
             >
               {slides[current].title}
             </motion.h1>
@@ -120,7 +120,7 @@ export default function Hero() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.45, duration: 0.5 }}
-              className="text-[14.5px] md:text-[18px] text-white/95 max-w-xl mb-8 font-normal tracking-wide leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
+              className="text-sm md:text-[17px] text-white/95 max-w-xl mb-8 font-normal tracking-wide leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
             >
               {slides[current].subtitle}
             </motion.p>
@@ -131,7 +131,7 @@ export default function Hero() {
             >
               <Link
                 to={slides[current].link}
-                className="px-9 py-4 bg-white text-charcoal hover:bg-rust hover:text-white text-[13px] tracking-[0.14em] uppercase font-bold transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-lg cursor-pointer inline-block rounded-xs"
+                className="px-9 py-4 bg-rust text-white hover:bg-mustard hover:text-charcoal text-[12px] md:text-[13px] tracking-[0.2em] uppercase font-bold transition-all duration-300 shadow-[0_4px_20px_rgba(189,91,52,0.4)] hover:shadow-[0_6px_25px_rgba(214,162,63,0.5)] cursor-pointer inline-block rounded-xs border border-white/20 hover:scale-[1.03] active:scale-[0.98]"
               >
                 {slides[current].cta}
               </Link>

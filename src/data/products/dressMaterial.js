@@ -128,10 +128,36 @@ export const NARAYAN_PETH_DRESS_MATERIAL = Array.from({ length: 5 }, (_, i) => (
   aboutThisItem: ["Classic Narayan Peth zari border suit material."]
 }));
 
+export const AJRAKH_DRESS_MATERIAL = Array.from({ length: 6 }, (_, i) => ({
+  id: 261 + i,
+  name: i === 0 ? "Authentic Kutch Ajrakh Block Print Cotton Suit" : `Modal Silk Ajrakh Hand-Block Dress Material - Style ${i + 1}`,
+  cat: "Dress Material",
+  subcat: "Ajrakh",
+  season: "All Season",
+  price: 2250 + i * 120,
+  mrp: Math.round((2250 + i * 120) * 1.25 / 100) * 100,
+  type: "dressmaterial",
+  tag: i === 0 ? "Bestseller" : (i === 1 ? "New" : null),
+  image: ikatDressImg,
+  images: [ikatDressImg],
+  colors: ["#bd5b34", "#1a4a2e"],
+  isSoldOut: false,
+  highlights: {
+    "Material composition": "100% Modal Silk & Ajrakh Block Cotton",
+    "Top fabric": "2.5 Meters Ajrakh Hand-block Printed Top",
+    "Bottom fabric": "2.0 Meters Plain Cotton Salwar Fabric",
+    "Dupatta fabric": "2.4 Meters Modal Silk Printed Dupatta",
+    "Care instructions": "Dry Clean / Gentle Wash with Cold Water",
+    "Country of Origin": "India"
+  },
+  aboutThisItem: ["Traditional Kutch Ajrakh hand block printed unstitched suit material using natural mineral pigments."]
+}));
+
 export const DRESS_MATERIAL_PRODUCTS = [
   ...IKAT_DRESS_MATERIAL,
   ...JAMDANI_DRESS_MATERIAL,
   ...KOTA_DORIYA_DRESS_MATERIAL,
   ...MAHESHWARI_DRESS_MATERIAL,
   ...NARAYAN_PETH_DRESS_MATERIAL,
+  ...AJRAKH_DRESS_MATERIAL,
 ];
